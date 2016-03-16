@@ -1,0 +1,42 @@
+#divc {
+	border:1px solid #555;
+	overflow:visible;
+	overflow-x:visible;
+	overflow-y:visible;
+}
+#divclist {
+	border:1px solid #555;
+}
+.des {
+	width:500px;
+	background-color:lightyellow;
+	border:1px solid #555;
+	padding:25px;
+	margin-top:25px;
+}
+.mouseover {
+	color:#ffffff;
+	background-color:highlight;
+	width:100%;
+	cursor:default;
+}
+.mouseout {
+	color:#000;
+	width:100%;
+	background-color:#ffffff;
+	cursor:default;
+}
+.toolBar {
+	color:#000;
+	width:100%;
+	background-color:#E6E6E6;
+	cursor:default;
+	border:1px solid #555;
+}
+.my-form-trigger-wrap {
+	border-bottom: 1px dotted;
+	border-color: darkgreen;
+}
+.my-form-invalid .my-form-trigger-wrap {
+	border-color: darkgreen;
+}

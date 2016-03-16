@@ -1,0 +1,36 @@
+.x-body, .x-accordion-hd .x-panel-header-text-container {
+  font-family: tahoma, arial, verdana, sans-serif, 宋体;
+}
+
+.x-progress-default .x-progress-text, .x-toolbar, .x-panel-header-default, .x-panel-header-default-framed, .x-tip-header-text-container-default, .x-tip-body-default, .x-tip-header-text-container-form-invalid, .x-tip-body-form-invalid, .x-window-header-default, .x-toolbar-item .x-form-item-label, .x-html-editor-tb .x-font-select, .x-menu-item-text, .x-menu-item .x-form-item-label {
+  font-size: 12px;
+}
+
+.x-dd-drag-ghost, .x-mask-msg-inner, .x-btn-group-header-text-container-default, .x-btn-group-header-text-container-default-framed, .x-form-invalid-under, .x-datepicker-column-header, .x-datepicker-date, .x-monthpicker-item, .x-html-editor-wrap textarea, .x-grid-empty, .x-column-header, .x-form-item, .x-form-field {
+  font: normal 12px tahoma, arial, verdana, sans-serif, 宋体;
+}
+
+.x-grid-group-title {
+  font: bold 12px tahoma, arial, verdana, sans-serif, 宋体;
+}
+
+.x-tab-default .x-tab-inner, .x-btn-default-small .x-btn-inner, .x-btn-default-medium .x-btn-inner, .x-btn-default-large .x-btn-inner, .x-btn-default-toolbar-small .x-btn-inner, .x-btn-default-toolbar-medium .x-btn-inner, .x-btn-default-toolbar-large .x-btn-inner, .x-toolbar .x-toolbar-text, .x-panel-header-text-container-default, .x-panel-header-text-container-default-framed, .x-window-header-text-container-default, .x-tab-default .x-tab-inner {
+  font-size: 11px;
+  font-family: tahoma, arial, verdana, sans-serif, 宋体;
+}
+
+.x-fieldset-header-text {
+  font: 12px/14px bold tahoma, arial, verdana, sans-serif, 宋体;
+}
+
+.x-grid-row .x-grid-cell, .x-grid-rowbody, .x-grid-row-summary .x-grid-cell-rowbody {
+  font: normal 12px/13px tahoma, arial, verdana, sans-serif, 宋体;
+}
+
+.x-grid-editor .x-form-text, .x-grid-row-editor .x-form-display-field {
+  font: 12px/15px bold tahoma, arial, verdana, sans-serif, 宋体;
+}
+
+.x-trigger-cell {
+  background-color: transparent;
+}

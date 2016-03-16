@@ -1,0 +1,29 @@
+body {
+
+    padding:0 0 0 0px;
+    width: 1100px;
+    margin: auto;
+  font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-weight: bold;
+}
+input{
+    width: 200px;
+    height: 30px;
+    line-height: 30px;
+    border: 3px #666666 solid;
+}
+a {
+  color: #00B7FF;
+}
+.commPage{
+    width: 1100px;
+    height:615px;
+    margin-top:10px;
+}
+.login{
+    background-image: url('/images/login_back.jpg');
+}
+.register{
+    background-image: url('/images/register.jpg');
+    font-size: 12px;
+}

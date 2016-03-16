@@ -1,0 +1,55 @@
+.dtm-shortcut {
+    background-image: url(../images/dtm-large.png);
+}
+
+.dtm-small {
+    background-image: url(../images/dtm-small.png);
+}
+
+#surgeryRomm-currStatus-panel .refresh {
+    background-image: url(../images/refresh.gif);
+}
+
+#surgeryRomm-currStatus-panel .setHidden {
+	display: inline-block;
+	width: 50%;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+#surgeryRomm-currStatus-panel .parentDiv {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+#surgeryRomm-currStatus-panel .subDiv1 {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	top: 32%;
+	z-index: 70;
+}
+
+#surgeryRomm-currStatus-panel .subDiv2 {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 80;
+}
+
+#surgeryRomm-currStatus-panel .subDiv3 {
+	position: absolute;
+	right: 0px;
+	z-index: 100;
+}
+.dtm-schedul-type-css{
+    border-right:1px solid #C0C0C0;
+}
+.dtm-schedul-excel{
+    background-image: url(../accessibility/images/excel.png);
+}
+
+

@@ -1,0 +1,508 @@
+<!-- 科室事务管理表格 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<style type="text/css">
+		.html-body-overflow
+		 {
+		 	overflow-x:hidden;
+		 	overflow-y:hidden;
+		 }
+		</style>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" type="text/css" href="/lib/extjs/resources/css/ext-all-neptune.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/common-png.css" />
+        <link rel="stylesheet" type="text/css" href="../sys/desktop/css/desktop.css" />
+        <link rel="stylesheet" type="text/css" href="./css/dtm.css" />
+    	<script type="text/javascript" src="/lib/extjs/ext-all.js"></script>
+		<script type="text/javascript" src="/lib/extjs/locale/ext-lang-zh_CN.js"></script>
+		<script type="text/javascript" src="/lib/extjs/ext-theme-neptune.js"></script>
+		<script type="text/javascript">
+		window.onresize = function(){
+			var scheduledGrid = Ext.getCmp('scheduledGrid');
+			scheduledGrid.setWidth(window.innerWidth);
+			scheduledGrid.setHeight(window.innerHeight);
+		};
+        var request = {
+            QueryString: function (val) {
+                var uri = window.location.search;
+                var re = new RegExp("" + val + "=([^&?]*)", "ig");
+                return ((uri.match(re)) ? (uri.match(re)[0].substr(val.length + 1)) : null);
+            },
+            showErr: function (err, info) {
+                parent.Ext.Msg.show({
+                    title: '错误',
+                    msg: '长期医嘱数据' + info + '失败：' + err,
+                    buttons: Ext.Msg.OK,
+                    icon: Ext.Msg.ERROR
+                });
+            },
+            showLanErr: function (info) {
+                parent.Ext.MessageBox.alert('提示', '数据' + info + '失败,请求超时或网络故障!');
+            }
+        };
+		window.onload = function() {
+            var owner = request.QueryString('owner');
+            owner = owner && owner == 'D' ? 'D' : 'N';
+			Ext.onReady(
+				function() {
+					var width = window.innerWidth;
+					var height = window.innerHeight;
+					var store = null;
+					Ext.define('schedulTypeModel',{
+						extend : 'Ext.data.Model',
+						fields : [{
+				            	name: 'ID',
+				            	type: 'string'
+				            },{
+				                name: 'NAME',
+				                type: 'string'
+				            }, {
+				                name: 'TIME_1ST_BEGIN',
+				                type: 'string'
+				            }, {
+				                name: 'TIME_1ST_END',
+				                type: 'string'
+				            }, {
+				                name: 'TIME_2ND_BEGIN',
+				                type: 'string'
+				            }, {
+				                name: 'TIME_2ND_END',
+				                type: 'string'
+				            }, {
+				                name: 'DESCRIPTION',
+				                type: 'string'
+				            }, {
+				            	name: 'DEPT_ID',
+				            	type: 'string'
+				            }]
+					});
+
+                    if (owner == 'D') {
+						store = Ext.create('Ext.data.Store', {
+				            model: 'schedulTypeModel',
+				            autoLoad: true,
+							proxy: {
+								type: 'ajax',
+								url: parent.webRoot + '/dtm/getSchedulTypeByOwner/D',
+								method: 'GET',
+								reader: {
+									type: 'json',
+									root: 'data'
+								}
+							}
+				        });
+					}else{
+						store = Ext.create('Ext.data.Store', {
+							model: 'schedulTypeModel',
+				            autoLoad: true,
+							proxy: {
+								type: 'ajax',
+								url: parent.webRoot + '/dtm/getSchedulTypeByOwner/N',
+								method: 'GET',
+								reader: {
+									type: 'json',
+									root: 'data'
+								}
+							}
+				        });
+					}
+
+					Ext.create('Ext.grid.Panel',{
+						id:'scheduledGrid',
+						columnLines: true,
+						multiSelect : true,
+                        enableColumnHide:false,
+						store: store,
+						width:width,
+			        	height:height,
+			        	renderTo: Ext.getBody(),
+			        	plugins: [
+							Ext.create('Ext.grid.plugin.CellEditing', {
+								clicksToEdit: 1
+							})
+						],
+						listeners:{
+							/*beforeedit : function(editor,e){
+								if(e.record.get('ID') != null && e.record.get('ID').length > 0){
+									if((e.record.get('DEPT_ID') == null||(e.record.get('DEPT_ID') != null && e.record.get('DEPT_ID').length<=0))){
+										e.cancel = true;
+									}
+								}
+								
+							}*/
+						},
+			            columns:[{
+			                text:'类型名称',
+			                width:120,
+			                dataIndex: 'NAME',
+			                editor: {
+								xtype: 'textfield',
+								allowBlank: false,
+								blankText: '类型名称不能为空',
+								maxLength: 200,
+								maxLengthText: '类型名称最大长度为200'
+							}
+			            },{
+			                text:'时段',
+			                columnWidth:0.5,
+			                groupable: false, //多层表头，不参与数据分组
+			                draggable:false,
+			                columns:[{
+			                    text:'第一时段',
+			                    groupable: false, //多层表头，不参与数据分组
+			                    draggable:false,
+			                    columns:[{
+			                        text:'起',
+			                        dataIndex: 'TIME_1ST_BEGIN',
+						            editor: {
+										xtype: 'textfield',
+										regex: /^(([0-1]\d)|(2[0-4])):[0-5]\d$/,
+										regexText: '请输入hh:mm格式的时间'
+									}
+			                    },{
+			                        text:'止',
+			                        dataIndex: 'TIME_1ST_END',
+						            editor: {
+										xtype: 'textfield',
+										regex: /^(([0-1]\d)|(2[0-4])):[0-5]\d$/,
+										regexText: '请输入hh:mm格式的时间'
+									}
+			                    }]
+			                },{
+			                    text:'第二时段',
+			                    groupable: false, //多层表头，不参与数据分组
+			                    draggable:false,
+			                    columns:[{
+			                        text:'起',
+			                        dataIndex: 'TIME_2ND_BEGIN',
+						            editor: {
+										xtype: 'textfield',
+										regex: /^(([0-1]\d)|(2[0-4])):[0-5]\d$/,
+										regexText: '请输入hh:mm格式的时间'
+									}
+			                    },{
+			                        text:'止',
+			                        dataIndex: 'TIME_2ND_END',
+						            editor: {
+										xtype: 'textfield',
+										regex: /^(([0-1]\d)|(2[0-4])):[0-5]\d$/,
+										regexText: '请输入hh:mm格式的时间'
+									}
+			                    }]
+			                }]
+			            },{
+			                text:'类型说明',
+			                width:120,
+			                dataIndex: 'DESCRIPTION',
+                            cls:'dtm-schedul-type-css',
+				            editor: {
+								xtype: 'textfield',
+								maxLength: 4000,
+								maxLengthText: '类型说明最大长度为4000'
+							}
+				    	}],
+			            dockedItems:[{
+			                xtype: 'toolbar',
+			                dock: 'top',
+							items: ['->',{
+								xtype: 'button',
+								tooltip : '保存',
+								tooltipType: 'title',
+								iconCls : 'save',
+								handler : function(){
+								    var gridPanle = this.up().up();
+									var store = gridPanle.getStore();
+									var modify = [];
+									var remove = [];
+									var schedulTypes = [];
+
+									var modifiedRecords = store.getModifiedRecords();
+									if(modifiedRecords.length <=0){
+										Ext.MessageBox.alert('提示', '没有数据变化');
+									}else{
+										if(modifiedRecords.length>0){
+											//判断时间是否成对出现
+											var resStr = dtm_schedulingTypeSaveVerify(modifiedRecords);
+											if(resStr != null && resStr.length > 0){
+												Ext.MessageBox.alert('提示', resStr + '；请填写后保存。');
+												return;
+											}
+											//判断是否有重名的
+											resStr = dtm_schedulingTypeAddVerify(store);
+											if(resStr != null && resStr.length > 0){
+												Ext.MessageBox.alert('提示', resStr);
+												return;
+											}
+											for(var i=0;i<modifiedRecords.length;i++){
+												var record = modifiedRecords[i];
+
+												var item = {
+													ID: record.get('ID'),
+										            NAME: record.get('NAME'),
+										            TIME_1ST_BEGIN: record.get('TIME_1ST_BEGIN'),
+										            TIME_1ST_END: record.get('TIME_1ST_END'),
+										            TIME_2ND_BEGIN : record.get('TIME_2ND_BEGIN'),
+										            TIME_2ND_END: record.get('TIME_2ND_END'),
+										            DESCRIPTION: record.get('DESCRIPTION'),
+										            OWNER: owner
+												};
+												modify.push(item);
+											}
+										}
+										schedulTypes.push(modify);
+										schedulTypes.push(remove);
+										Ext.Ajax.request({
+								            url: parent.webRoot + '/dtm/saveSchedulTypes',
+								            method: 'POST',
+								            params:{saveRecords : Ext.encode(schedulTypes)},
+								            success: function(response) {
+								            	store.load();
+								            }
+								        });
+									}
+								}
+							},{
+								xtype: 'button',
+								tooltip : '添加',
+								tooltipType: 'title',
+								iconCls : 'add',
+								handler : function(){
+									var gridPanle = this.up().up();
+									var store = gridPanle.getStore();
+								    var count = store.getCount();
+								    var row = Ext.create('schedulTypeModel', {
+								        ID: null,
+								        NAME:'',
+								        TIME_1ST_BEGIN: '',
+								        TIME_1ST_END: '',
+								        TIME_2ND_BEGIN : '',
+								        TIME_2ND_END:'',
+								        DESCRIPTION:'',
+                                        DEPT_ID: '',
+                                        OWNER: owner
+								    });
+								    store.insert(count, row);
+								}
+							},{
+								xtype: 'button',
+								tooltip : '删除',
+								tooltipType: 'title',
+								iconCls : 'delete',
+								handler : function(){
+									var me = this;
+									var grid = me.up().up();
+								    var records = grid.getSelectionModel().getSelection();
+								    var store = this.up().up().store;
+								    if(records.length <= 0){
+								    	Ext.MessageBox.alert('提示', '请选中一条排班类型进行删除');
+								    }else{
+                                        if(records[0].data.ID=='be0df177abf011e396e800271396a820'||records[0].data.ID=='c7605a40abf011e396e800271396a820'){
+                                            Ext.MessageBox.alert('提示', '不能删除内置排班类型！');
+                                            return false;
+                                        }
+								    	var removeArr = [];
+								    	for(var i=0;i<records.length;i++){
+								    		if(records[i].get('ID') != null && records[i].get('ID').length>0){
+								    			removeArr.push(records[i].get('ID'));
+								    		}
+								    	}
+								    	//判断删除的排班类型是否在排班日历中使用
+								    	if(removeArr!=null&&removeArr.length>0){
+								    		Ext.Ajax.request({
+								                url: parent.webRoot + '/dtm/isInScheduling',
+								                method: 'POST',
+								                params:{removeRecords : Ext.encode(removeArr)},
+								                success: function(response) {
+								                	var res = Ext.decode(response.responseText).data;
+								                	if(res&&res.length>0){
+								                		Ext.MessageBox.alert('提示', '排班类型' + res + '在排班日历中使用，不能删除。');
+								                	}else{
+								                		Ext.MessageBox.confirm('提示', '确定删除选中的排班类型信息吗?', function(_btn) {
+																if (_btn == 'yes') {
+																	var grid = me.up().up();
+																	Ext.Ajax.request({
+									                                    url: parent.webRoot + '/dtm/deleteSchedulTypes',
+									                                    method: 'POST',
+									                                    params:{removeRecords : Ext.encode(removeArr)},
+									                                    success: function(response) {
+                                                                            grid.getStore().reload();
+									                                    	//Ext.MessageBox.alert('提示', '删除成功。');
+									                                    	//store.load();
+									                                    }
+									                                });
+																} else {
+																	return false;
+																}
+														});
+								                	}
+								                }
+								            });
+								    	}else{
+								    		Ext.MessageBox.confirm('提示', '确定删除选中的排班类型信息吗?', function(_btn) {
+													if (_btn == 'yes') {
+														Ext.each(records,function(records){
+								                            grid.getStore().remove(records);
+								                        });
+								                        //Ext.MessageBox.alert('提示', '删除成功。');
+													} else {
+														return false;
+													}
+											});
+								    	}
+								    }
+								}
+							},{
+								xtype: 'button',
+								tooltip : '向上',
+								tooltipType: 'title',
+								iconCls : 'up',
+								handler : function(){
+								    var gridPanle = this.up().up();
+									var store = gridPanle.getStore();
+									var records = gridPanle.getSelectionModel().getSelection();
+									var index = records[0]?records[0].index:0;
+									if(index>0){
+										Ext.each(records,function(records){
+								            store.remove(records);
+								        });
+								        store.insert(index-1 , records);
+								        store.getAt(index-1).index = index-1;
+								        store.getAt(index).index = index;
+								    }
+								    gridPanle.getSelectionModel().select(store.getAt(index-1));
+								}
+							},{
+								xtype: 'button',
+								tooltip : '向下',
+								tooltipType: 'title',
+								iconCls : 'down',
+								handler : function(){
+									var gridPanle = this.up().up();
+									var store = gridPanle.getStore();
+								    var records = gridPanle.getSelectionModel().getSelection();
+                                    var index = records[0]?records[0].index:store.getCount()+1;
+								    if(index<store.getCount()-1){
+								        Ext.each(records,function(records){
+								            store.remove(records);
+								        });
+								        store.insert(index+1 , records);
+								        store.getAt(index).index = index;
+								        store.getAt(index+1).index = index + 1;
+								    }
+								    gridPanle.getSelectionModel().select(store.getAt(index+1));
+								}
+							}]
+			            }]
+			        });
+				}
+			);
+		};
+
+		//验证排班类型记录是否可以保存
+		function dtm_schedulingTypeSaveVerify(records){
+			var resStr = '';
+			for(var i=0;i<records.length;i++){
+				if(resStr.length>0){
+					resStr = resStr.substring(0,resStr.length-1) + '；';
+				}
+				var record = records[i];
+				//--------验证类型名称是否为空
+				if(record.get('NAME') != null && record.get('NAME').length<=0){
+					resStr += '新增行的排班类型名称为空，';
+					break;
+					//continue;
+				}
+
+				if(record.get('NAME') != null && (record.get('NAME').replace(/(^\s*)|(\s*$)/g, "")).length<=0){
+					resStr += '空白名称的排班类型名称为空格，';
+					break;
+				}
+
+				//--------验证起始、结束时间是否成对出现 第一时段
+				var flag1 = dtm_startEndTimeVerify(record.get('TIME_1ST_BEGIN'),record.get('TIME_1ST_END'));
+				if(parseInt(flag1)>0){
+					if(parseInt(flag1) === 1){
+						resStr += '排班类型【' +record.get('NAME') + '】的第一时段终止时间为空，';
+					}
+					if(parseInt(flag1) === 2){
+						resStr += '排班类型【' +record.get('NAME') + '】第一时段起始时间为空，';
+					}
+				}
+
+				var flag2 = dtm_startEndTimeVerify(record.get('TIME_2ND_BEGIN'),record.get('TIME_2ND_END'));
+				if(parseInt(flag2)>0){
+					if(parseInt(flag2) === 1){
+						resStr += '排班类型【' +record.get('NAME') + '】第二时段终止时间为空，';
+					}
+					if(parseInt(flag2) === 2){
+						resStr += '排班类型【' +record.get('NAME') + '】第二时段起始时间为空，';
+					}
+				}
+ /*               if(resStr.length==0){
+                    var start1S=Number(record.get('TIME_1ST_BEGIN').replace(':',''));
+                    if(record.get('TIME_1ST_END')=='00:00'){
+                        record.set('TIME_1ST_END','23:59');
+                    }
+                   *//* var start1E=Number(record.get('TIME_1ST_END').replace(':',''));
+                    if(start1S>start1E&&((start1S>=1200&&start1E>1200)||(start1S<=1200&&start1E<1200))){
+                        resStr += '排班类型【' +record.get('NAME') + '】第一时段起始时间大于结束时间，';
+                    }
+                    var start2S=Number(record.get('TIME_2ND_BEGIN').replace(':',''));
+                    if(record.get('TIME_2ND_END')=='00:00'){
+                        record.set('TIME_2ND_END','23:59');
+                    }
+                    var start2E=Number(record.get('TIME_2ND_END').replace(':',''));
+                    if(start2S>start2E&&((start2S>=1200&&start2E>1200)||(start2S<=1200&&start2E<1200))){
+                        resStr += '排班类型【' +record.get('NAME') + '】第二时段起始时间大于结束时间，';
+                    }*//*
+                    *//*if(start1E>start2S){
+                        resStr += '排班类型【' +record.get('NAME') + '】第一时段结束时间大于第二时段开始时间，';
+                    }*//*
+                }*/
+			}
+			return resStr.substring(0,resStr.length-1);
+		}
+
+		//验证起始、结束时间字符串是否成对出现
+		function dtm_startEndTimeVerify(startStr,endStr){
+			//起始、结束时间为空
+			if(startStr != null && startStr === '' && endStr != null && endStr === ''){
+				return 0;
+			}
+			//起始、结束时间不为空
+			if(startStr != null && startStr.length > 0 && endStr != null && endStr.length > 0){
+				return 0;
+			}
+			//起始时间不为空、结束时间为空
+			if(startStr != null && startStr.length > 0 && endStr != null && endStr === ''){
+				return 1;
+			}
+			//起始时间为空、结束时间不为空
+			if(startStr != null && startStr === '' && endStr != null && endStr.length > 0){
+				return 2;
+			}
+		}
+
+		//验证新增排班类型是否有重名
+		function dtm_schedulingTypeAddVerify(store){
+			var res = '';
+			var names = [];
+			for(var i=0;i<store.getCount();i++){
+				var name = store.getAt(i).get('NAME');
+				if(names.length>0){
+					for(var j=0;j<names.length;j++){
+						if(name ===  names[j]){
+							res += name + ',排班类型已存在;';
+						}
+					}
+				}
+				names.push(name);
+			}
+			return res.substring(0,res.length - 1);
+		}
+		</script>
+	</head>
+	<body oncontextmenu=self.event.returnValue=false>
+	</body>
+</html>

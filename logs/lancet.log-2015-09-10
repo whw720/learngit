@@ -1,0 +1,14 @@
+[2015-09-10 11:35:53.221] [DEBUG] SingleProcessRun - 单进程服务端启动成功，端口：5000
+[2015-09-10 14:22:40.874] [ERROR] lancet-icu - uncaughtException: 
+Error: listen EADDRINUSE
+    at errnoException (net.js:901:11)
+    at Server._listen2 (net.js:1039:14)
+    at listen (net.js:1061:10)
+    at Server.listen (net.js:1127:5)
+    at Function.app.listen (D:\mygit\school\node_modules\express\lib\application.js:534:24)
+    at Object.exports.run (D:\mygit\school\controllers\cluster\SingleProcessRun.js:9:22)
+    at Object.exports.run (D:\mygit\school\controllers\cluster\IcuRun.js:20:39)
+    at Object.<anonymous> (D:\mygit\school\lancet-icu.js:154:8)
+    at Module._compile (module.js:456:26)
+    at Object.Module._extensions..js (module.js:474:10)
+[2015-09-10 14:22:46.579] [DEBUG] SingleProcessRun - 单进程服务端启动成功，端口：5000

@@ -1,0 +1,652 @@
+.login-user-cls {
+	background-image: url(../images/login_icom_01.png) !important;   
+    background-repeat:no-repeat;   
+    background-position-x:13px; 
+    background-position-y:9px;
+    padding-left:50px;  
+    font-family: 微软雅黑;   
+}
+
+.login-password-cls {
+	background-image: url(../images/login_icom_02.png);
+	background-repeat:no-repeat;   
+    background-position-x:13px; 
+    background-position-y:8px;
+    padding-left:50px; 
+    font-family: 微软雅黑; 
+}
+.login-role-cls {
+	background-image: url(../images/login_icom_03.png);
+	background-repeat:no-repeat;   
+    background-position-x:13px; 
+    background-position-y:10px;
+    padding-left:50px; 
+    font-family: 微软雅黑; 
+}
+.login-roletrigger-cls {
+	background-image: url(../images/login_icom_04.png);height:37px;
+	background-repeat:no-repeat;
+	background-position-x:8px; 
+    background-position-y:15px;
+    background-position: 0px 15px !important;
+	
+}
+.add {
+    background-image: url(../images/add.png);
+}
+
+.filter {
+    background-image: url(../images/filter.png);
+}
+
+.edit {
+    background-image: url(../images/edit.png);
+}
+
+.delete {
+    background-image: url(../images/delete.png);
+}
+.left {
+    background-image: url(../images/left.png);
+}
+.right {
+    background-image: url(../images/right.png);
+}
+
+.infection {
+    background: transparent url(../images/infection.png);
+    width: 16px;
+    height: 16px;
+    margin-left: 1px;
+    margin-top: 29px;
+    position: absolute;
+}
+
+.emergency {
+    background: transparent url(../images/emergency.png);
+    width: 16px;
+    height: 16px;
+    margin-left: 31px;
+    margin-top: 29px;
+    position: absolute;
+}
+
+.examine-info {
+    background-image: url(../images/examine-info.png);
+}
+
+.case-history {
+    background-image: url(../images/case-history.png);
+}
+
+.doctor-ask {
+    background-image: url(../images/doctor-ask.png);
+}
+
+.ecg {
+    background-image: url(../images/ecg.png);
+}
+
+.image {
+    background-image: url(../images/image.png);
+}
+
+.status-scheduled {
+    background: transparent url(../images/scheduled.png);
+    width: 16px;
+    height: 16px;
+    margin-left: 38px;
+    margin-top: -24px;
+    position: absolute;
+}
+
+.status-scheduling {
+    background: transparent url(../images/scheduling.png);
+    width: 16px;
+    height: 16px;
+    margin-left: 38px;
+    margin-top: -24px;
+    position: absolute;
+}
+
+.status-completed {
+    background: transparent url(../images/completed.png);
+    width: 16px;
+    height: 16px;
+    margin-left: 38px;
+    margin-top: -24px;
+    position: absolute;
+}
+
+.status-doing {
+    background: transparent url(../images/doing.png);
+    width: 16px;
+    height: 16px;
+    margin-left: 38px;
+    margin-top: -24px;
+    position: absolute;
+}
+
+.scheduled {
+    background-image: url(../images/scheduled.png);
+}
+
+.consent {
+    background-image: url(../images/consent.png);
+}
+
+.plan {
+    background-image: url(../images/plan.png);
+}
+
+.mas-small {
+    background-image: url(../images/mas-small.png);
+}
+
+.follow-up {
+    background-image: url(../images/follow-up.png);
+}
+
+.analgesic {
+    background-image: url(../images/analgesic.png);
+}
+
+.mds-small {
+    background-image: url(../images/mds-small.png);
+}
+
+.check-list {
+    background-image: url(../images/check-list.png);
+}
+
+.archives-process-green {
+    border: solid 1px darkgreen;
+    height: 5px;
+    width: 44px;
+    margin-top: 1px;
+    margin-left: 1px;
+    position:relative;
+}
+
+.archives-process-inner-green {
+    height: 3px;
+    width: 0px;
+    background-color: rgba(0, 128, 0, .6);
+    background:-webkit-gradient(linear, 0 0, 100% 0, from(#00ff00), to(#006400));
+    opacity: .6;
+    position:relative;
+}
+
+
+.archives-process-red {
+    border: solid 1px darkred;
+    height: 5px;
+    width: 44px;
+    margin-top: 1px;
+    margin-left: 1px;
+    position:relative;
+}
+
+.archives-process-inner-red {
+    height: 3px;
+    width: 0px;
+    background-color: rgba(0, 128, 0, .6);
+    background:-webkit-gradient(linear, 0 0, 100% 0, from(#ffff00), to(#ff0000));
+    opacity: .6;
+    position:relative;
+}
+
+.request-small {
+    background-image: url(../images/request-small.png);
+}
+
+.mbs-small {
+    background-image: url(../images/mbs-small.png);
+}
+
+.assist-examine {
+    background-image: url(../images/assist-examine.png);
+}
+
+.search {
+    background-image: url(../images/search.png);
+}
+
+.scheduler {
+    background-image: url(../images/scheduler.png);
+}
+
+.save {
+    background-image: url(../images/save.png);
+}
+
+.cancel {
+    background-image: url(../images/cancel.png);
+}
+
+.device-disabled {
+    background-image: url(../images/device-disabled.png);
+}
+
+.device-normal {
+    background-image: url(../images/device-normal.png);
+}
+
+.device-warning {
+    background-image: url(../images/device-warning.png);
+}
+
+.line {
+    background-image: url(../images/line.png);
+}
+
+.word {
+    background-image: url(../images/word.png);
+}
+
+.rectangle {
+    background-image: url(../images/rectangle.png);
+}
+
+.guide {
+    background-image: url(../images/guide.gif);
+}
+
+.guide-setup {
+    background-image: url(../images/guide-setup.png);
+}
+
+.summary {
+    background-image: url(../images/summary.png);
+}
+
+.up {
+    background-image: url(../images/up.png);
+}
+
+.down {
+    background-image: url(../images/down.png);
+}
+
+.records {
+    background-image: url(../images/records.png);
+}
+
+.stop {
+    background-image: url(../images/stop.png);
+}
+
+.submit {
+    background-image: url(../images/submit.png);
+
+}
+
+#copyright {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    z-index: 15000;
+
+    /* IE 5-7 */
+    filter: alpha(opacity=70);
+    /* Netscape */
+    -moz-opacity: 0.7;
+    /* Safari 1.x */
+    -khtml-opacity: 0.7;
+    /* Good browsers */
+    opacity: 0.7;
+}
+#company_logo{
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    z-index: 15000;
+
+    /* IE 5-7 */
+    filter: alpha(opacity=70);
+    /* Netscape */
+    -moz-opacity: 0.7;
+    /* Safari 1.x */
+    -khtml-opacity: 0.7;
+    /* Good browsers */
+    opacity: 0.7;
+
+}
+#company_logo div {
+     position: relative;
+     width: 500px;
+     height: 50px;
+     background-image: url(../images/System_Logo.png);
+     background-repeat: no-repeat;
+ }
+
+.x-grid-group,
+.x-grid-group-body,
+.x-grid-group-hd {
+  zoom: 1;
+}
+
+.x-grid-group-hd {
+  white-space: nowrap;
+}
+
+.x-grid-group-hd {
+  border-width: 0 0 2px 0;
+  border-style: solid;
+  border-color: #99bbe8;
+  padding: 10px 4px 4px 4px;
+  background: white;
+  cursor: pointer;
+}
+
+.x-grid-group-hd-not-collapsible {
+  cursor: default;
+}
+
+.x-grid-group-hd-collapsible .x-grid-group-title {
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-image: url(../images/group-collapse.gif);
+  padding: 0 0 0 17px;
+}
+
+.x-grid-group-hd-collapsed .x-grid-group-title {
+  background-image: url(../images/group-expand.gif);
+}
+
+.x-grid-group-title {
+  color: #3764a0;
+  font: bold 11px/13px tahoma, arial, verdana, sans-serif;
+}
+
+#copyright div {
+    position: relative;
+    width: 225px;
+    height: 25px;
+    background-image: url(../images/copyright.png);
+    background-repeat: no-repeat;
+}
+
+/* The simple background image PNG does not work in IE6-8, but does in IE9 */
+.x-ie6 #copyright div,
+.x-ie7 #copyright div,
+.x-ie8 #copyright div {
+    background-image: none;
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/copyright.png', sizingMethod='scale');
+}
+
+/*----------------------------------------------------
+    Start Button
+*/
+
+.ux-start-button-icon {
+    background-image: url(../images/taskbar/dfsoft_new.png) !important;
+    background-color: transparent;
+}
+
+.ux-start-button .x-btn-arrow {
+    background-image: none;
+    padding-right: 0px;
+}
+.bar-button-style{
+    background-color: #ddeef5;
+    background-image:none;
+    border-width: 0px;
+}
+.bar-set-button-style{
+    background-color: #ddeef5;
+    background-image:none;
+    border-color: #9a9a9a;
+    height: 26px !important;
+    width:  82px !important;
+}
+.bar-set-button-style span{
+    height: 16px !important;
+}
+.ux-taskbar {
+    padding-left: 4px !important;
+}
+
+/*
+    Start Button (Black)
+*/
+
+.ux-desktop-black .ux-start-button {
+    height: 28px;
+    padding: 0px;
+    display: block;
+}
+
+.ux-desktop-black .ux-start-button em {
+    margin-top: 5px;
+}
+
+.ux-desktop-black .ux-start-button .x-btn-inner {
+    color: black;
+    font-size:11px;
+    font-weight: bold;
+}
+
+.ux-desktop-black .ux-start-button {
+    background-image: -moz-linear-gradient(center top , #E4F3FF, #D9EDFF 48%, #C2D8F2 52%, #C6DCF6);
+    border-radius: 8px 8px 8px 8px;
+    border-color: #81A4D0;
+}
+
+/*----------------------------------------------------
+    Start Menu
+*/
+
+.ux-start-menu-toolbar .x-btn-inner {
+    text-align: left;
+}
+
+.ux-start-menu-toolbar {
+    padding: 4px !important;
+    background: transparent;
+    padding-left: 15px !important;
+    top:318px !important;
+    height: 38px !important;
+}
+.ux-start-menu-toolbar div{
+    height: 26px !important;
+}
+.ux-start-menu-body {
+    background: #ddeef5;
+}
+
+/*----------------------------------------------------
+    TaskBar
+*/
+
+/* Use high specificity selector to override default styling*/
+div.ux-taskbar div.x-toolbar {
+    background: transparent none;
+    border: 0 none;
+    padding: 0;
+}
+
+.ux-desktop-windowbar .x-btn-inner,
+.x-nbr .ux-desktop-windowbar .x-btn-icon-text-left button {
+    text-align: left !important;
+}
+
+/*
+    TaskBar (Black)
+*/
+
+.ux-desktop-black .ux-taskbar {
+    background: transparent url('../images/taskbar/black/taskbar-start-panel-bg.gif') repeat-x left top;
+    border-color: transparent;
+    /*height: 30px;*/
+}
+
+.ux-desktop-black .ux-taskbar .x-splitter {
+    background: transparent url(../images/taskbar/black/taskbar-split-h.gif) no-repeat scroll 0 -2px;
+}
+
+.ux-desktop-black .ux-taskbar .x-toolbar-text {
+    color: white !important;
+}
+
+.ux-desktop-black .ux-taskbar .x-btn-default-toolbar-small-over {
+    background-color: yellow;
+}
+
+.ux-desktop-black .ux-taskbar .x-btn-inner {
+    color: white;
+}
+
+.ux-desktop-black .ux-taskbar .x-btn-pressed .x-btn-inner, .ux-taskbar .x-btn-over .x-btn-inner {
+    color: black;
+}
+
+/*----------------------------------------------------
+    Tray Clock
+*/
+
+.ux-desktop-trayclock {
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/*----------------------------------------------------
+    Desktop DataView
+*/
+
+.ux-wallpaper {
+    background-color: #3d71b8;
+}
+
+.ux-wallpaper-tiled {
+    background-repeat: repeat;
+}
+
+.ux-desktop-shortcut {
+    cursor: pointer;
+    text-align: center;
+    padding: 8px;
+    margin: 8px;
+    width: 70px;
+}
+
+.ux-desktop-shortcut-icon {
+    width: 60px;
+    height: 60px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+
+.ux-desktop-shortcut-text {
+    font: normal 10px tahoma,arial,verdana,sans-serif;
+    text-decoration: none;
+    padding-top: 5px;
+    color: white;
+    padding-left: 5px;
+    /*text-shadow: 1px 0px 0px #666666;*/
+    text-shadow: 0px 1px 2px rgba(0,0,0,0.7);
+    /*font-weight: bold;*/
+}
+.start-panel-body-style {
+    background-color: #ddeef5;
+    padding-top: 15px;
+}
+.start-panel-body-out-style {
+    top:43px !important;
+    height: 280px !important;
+}
+.panel-menu-item-style {
+    line-height: 30px;
+    padding-left: 10px;
+    font-size: 14px !important;
+    border-width: 0px !important;
+}
+.x-view-over .ux-desktop-shortcut-text {
+    text-decoration: underline;
+}
+
+.logout {
+    background-image: url( ../images/logout.png ) !important;
+}
+
+.settings {
+    background-image: url( ../images/gears.png ) !important;
+}
+
+.timing-small {
+    background-image: url( ../images/timing-small.png ) !important;
+}
+
+.timing-large {
+    background-image: url( ../images/timing-large.png ) !important;
+}
+
+.msg .x-box-mc {
+    font-size:14px;
+}
+#msg-div {
+    position:absolute;
+    left:50%;
+    top:10px;
+    width:400px;
+    margin-left:-200px;
+    z-index:20000;
+}
+#msg-div .msg {
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    background: #F6F6F6;
+    border: 2px solid #ccc;
+    margin-top: 2px;
+    padding: 10px 15px;
+    color: #555;
+}
+#msg-div .msg h3 {
+    margin: 0 0 8px;
+    font-weight: bold;
+    font-size: 15px;
+}
+#msg-div .msg p {
+    margin: 0;
+}
+.user{
+    background-image: url(../images/user.png);
+}
+
+.mbs-preparation{
+    background-image: url(../images/mbs-preparation.png);
+}
+.care-record{
+    background-image: url(../images/care-record.png);
+}
+.equip-inventory{
+    background-image: url(../images/equip-inventory.png);
+}
+.locked{
+    background-image: url(../images/locked.png) !important;
+    background-color: transparent;
+}
+.grade{
+    background-image: url(../images/grade.png);
+}
+
+.pac-record_but{
+    background-image: url(../images/pac-record_but.png);
+}
+.pac-small {
+    background-image: url(../images/pacu-small.png);
+}
+#changePassword a:link {
+     color: blue;
+     text-decoration:none;
+ }
+#changePassword a:visited {
+    color: blue;
+    text-decoration:none;
+}
+#changePassword a:hover {
+    color: red;
+    text-decoration: underline;
+}

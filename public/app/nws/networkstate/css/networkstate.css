@@ -1,0 +1,15 @@
+.network-state-small {
+    background-image: url(../images/state-small.png);
+}
+.network-state-refresh {
+    background-image: url(../images/refresh.png);
+}
+.network-state-normal {
+    background-image: url(../images/state-normal.png);
+}
+.network-state-noconn {
+    background-image: url(../images/state-noconn.png);
+}
+.network-state-nodata {
+    background-image: url(../images/state-nodata.png);
+}

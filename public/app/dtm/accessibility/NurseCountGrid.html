@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <style type="text/css">
+        .html-body-overflow {
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" src="/lib/extjs/ext-all.js"></script>
+    <script type="text/javascript" src="/lib/extjs/locale/ext-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="/lib/extjs/ext-theme-neptune.js"></script>
+    <link rel="stylesheet" type="text/css" href="/lib/extjs/resources/css/ext-all-neptune.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/common-png.css"/>
+    <link rel="stylesheet" type="text/css" href="../../sys/desktop/css/desktop.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/accessibility.css"/>
+    <script type="text/javascript" src="./MonthComboBox.js"></script>
+    <script type="text/javascript">
+        /*window.onresize = function () {
+        };*/
+        window.onload = function () {
+            Ext.onReady(
+                    function () {
+                        var width = window.innerWidth;
+                        var height = window.innerHeight;
+                        var me = this;
+
+                        me.field=['ID','NAME','SCORE_ALL'];
+                        me.currentYearMonthStr=Ext.Date.format(new Date(),'Y年m月');
+                        me.currentYearMonth=Ext.Date.format(new Date(),'Ym');
+                        me.yearMonth=Ext.create('com.dfsoft.icu.dtm.accessibility.MonthComboBox',{
+                            width:190,
+                            value:new Date(),
+                            editable:false,
+                            labelWidth:58,
+                            fieldLabel : '统计年月',
+                            labelAlign:'right'
+                        });
+                        me.column = [
+                            {
+                                text: '序号',
+                                xtype: 'rownumberer',
+                                width: 40,
+                                align: 'center'
+                            },
+                            { text: '姓名',
+                                dataIndex: 'NAME',
+                                style: {
+                                    'text-align': 'center'
+                                },
+                                width: 100,
+                                align: 'left'
+                            },
+                            {
+                                text: '工作总分',
+                                dataIndex: 'SCORE_ALL',
+                                style: {
+                                    'text-align': 'center'
+                                },
+                                width: 80,
+                                align: 'right'
+                            }
+                        ];
+                        Ext.create('Ext.grid.Panel',{
+                            id: 'accessibility-nurse-count-grid',
+                            width:width,
+                            height:height,
+                            layout:'fit',
+                            store: [],
+                            columns: [],
+                            renderTo: Ext.getBody(),
+                            dockedItems: [
+                                {
+                                    xtype: 'toolbar',
+                                    dock: 'top',
+                                    style:{
+                                        'border-bottom':'1px solid #C0C0C0 !important'
+                                    },
+                                    items : ['->',
+                                        me.yearMonth,{
+                                            xtype:'button',
+                                            iconCls: 'dtm-accessibility-refresh',
+                                            scale: 'small',
+                                            tooltip: '查询',
+                                            handler:function(btn){
+                                                queryNurseCount();
+                                            }
+                                        },'-',{
+                                            xtype:'button',
+                                            iconCls: 'dtm-accessibility-print',
+                                            scale: 'small',
+                                            tooltip: '打印',
+                                            handler:function(){
+                                                printGrid();
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype:'toolbar',
+                                    height:56,
+                                    html:'<div style="width:100%;font-size:24px;text-align: center;font-weight:bold;">护士月度工作量统计</div>'+
+                                            '<div style="font-size:11px;text-align: left" id="report_count_yearmonth">'+me.currentYearMonthStr+'</div>'
+                                }
+                            ],
+                            columnLines: true,
+                            border: false,
+                            listeners:{
+                                afterrender:function(_this,e){
+                                    Ext.Ajax.request({
+                                        url: parent.webRoot + '/dtm/accessibility/query_nurse_column',
+                                        success: function(response) {
+                                            var result = Ext.decode(response.responseText);
+                                            if (result.success){
+                                                var res=result.data;
+                                                for(var re in res){
+                                                    me.column.push({
+                                                        text:re,
+                                                        style: {
+                                                            'text-align': 'center'
+                                                        },
+                                                        columns:res[re]
+                                                    });
+                                                    for(var i=0;i<res[re].length;i++){
+                                                        var fe=res[re][i];
+                                                        me.field.push(fe.dataIndex);
+                                                    }
+                                                }
+                                                me.groupStore=Ext.create('Ext.data.Store',{
+                                                    fields:me.field,
+                                                    proxy: {
+                                                        type: 'ajax',
+                                                        url: parent.webRoot + '/dtm/accessibility/query_nurse_count',
+                                                        extraParams:{
+                                                            yearmonth:me.currentYearMonth
+                                                        },
+                                                        reader: {
+                                                            type: 'json',
+                                                            root: 'data'
+                                                        }
+                                                    },
+                                                    autoLoad: true
+                                                });
+                                                _this.reconfigure(me.groupStore, Ext.grid.column.Column(me.column));
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        })
+
+                    }
+            );
+        };
+        function queryNurseCount(){
+            var me=this;
+            var grid=Ext.getCmp('accessibility-nurse-count-grid');
+            var mon=me.yearMonth.getYearMonth();
+            document.getElementById('report_count_yearmonth').innerText=me.yearMonth.getYearMonthStr();
+            grid.getStore().on('beforeload', function (_store, options) {
+                Ext.apply(_store.proxy.extraParams, {
+                    'yearmonth':mon
+                });
+            });
+            grid.getStore().load();
+        }
+        function printGrid(){
+            var me=this;
+            var gridcontrol=Ext.getCmp('accessibility-nurse-count-grid');
+
+            var cm = me.column;//gridcontrol.getColumnModel();
+            var ym=me.yearMonth.getYearMonthStr();
+            var colCount = cm.length;
+            var temp_obj = new Array();
+            var colAllCount=0;
+            for (var i = 0; i < colCount; i++) {
+                if(cm[i].columns!=null&&cm[i].columns.length>0){
+                    colAllCount+=cm[i].columns.length;
+                    temp_obj=temp_obj.concat(cm[i].columns);
+                }else{
+                    colAllCount++;
+                    temp_obj.push(cm[i]);
+                }
+            }
+            var tableStr = '<table  style="border-top:1px black solid;border-left:1px black solid; width:100%;"cellpadding=0 cellspacing=0>';
+
+            tableStr+='<tr><td colspan="'+colAllCount+'" style="border-right:1px black solid;font-size:24px;text-align: center;font-weight:bold;">护士月度工作量统计</td></tr>';
+            tableStr+='<tr><td colspan="'+colAllCount+'" style="border-right:1px black solid;border-bottom:1px black solid;font-size:11px;text-align: left;">'+ym+'</td></tr>';
+
+
+            for (var i = 0; i < colCount; i++) {
+                if(cm[i].columns!=null&&cm[i].columns.length>0){
+                    tableStr = tableStr + '<td colspan="'+cm[i].columns.length+'" style="border-right:1px black solid;border-bottom:1px black solid;text-align: center;">' + cm[i].text + '</td>';
+                }else{
+                    tableStr = tableStr + '<td rowspan="2" style="border-right:1px black solid;border-bottom:1px black solid;text-align: center;">' + cm[i].text + '</td>';
+                }
+            }
+            tableStr = tableStr + '</tr>';
+            for (var i = 0; i < colCount; i++) {
+                if(cm[i].columns!=null&&cm[i].columns.length>0){
+                    for(var j=0;j<cm[i].columns.length;j++){
+                        tableStr = tableStr + '<td style="border-right:1px black solid;border-bottom:1px black solid;text-align: center;width:70px;">' + cm[i].columns[j].text + '</td>';
+                    }
+                }
+            }
+            tableStr = tableStr + '</tr>';
+            var store = gridcontrol.getStore();
+            var recordCount = store.getCount();
+            for (var i = 0; i < recordCount; i++) {
+                var r = store.getAt(i);
+                for (var j = 0; j < temp_obj.length; j++) {
+                    var dateIndex = temp_obj[j].dataIndex;
+                    var tdvalue = r.get(dateIndex);
+                    if (tdvalue == null) {
+                        tdvalue = '';
+                    }
+                    if(j==0){
+                        tableStr = tableStr + '<td style="border-right:1px black solid;border-bottom:1px black solid;text-align: center;">' + (i+1) + '</td>';
+                    }else if(j==1){
+                        tableStr = tableStr + '<td style="border-right:1px black solid;border-bottom:1px black solid;">' + tdvalue + '</td>';
+                    }else{
+                        tableStr = tableStr + '<td style="border-right:1px black solid;border-bottom:1px black solid;text-align: right;">' + tdvalue + '</td>';
+                    }
+                }
+                tableStr = tableStr + '</tr>';
+            }
+            tableStr = tableStr + '</table>';
+            var titleHtml = tableStr;
+            var newwin = window.open('printer.html', '', '');
+            newwin.document.write(titleHtml);
+            newwin.document.location.reload();
+            newwin.print();
+            newwin.close();
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>

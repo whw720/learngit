@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>ISS得分</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            /*
+             *
+             * rtsCorse RTS得分
+             * issCorse ISS 得分
+             * trsissCorse TRSISS 得分
+             * Contusion 钝挫伤死亡率
+             * pi  贯穿伤 死亡率
+             *
+             * */
+            var tss = parent.Ext.getCmp("issRtsScroeWindow").issCorse;
+            var trs = parent.Ext.getCmp("issRtsScroeWindow").rtsCorse;
+            var triss = parent.Ext.getCmp("issRtsScroeWindow").trsissCorse;
+            var dcs = parent.Ext.getCmp("issRtsScroeWindow").Contusion;
+            var gcs = parent.Ext.getCmp("issRtsScroeWindow").pi;
+
+            document.getElementById("isstableid").rows.item(2).cells.item(0).innerHTML = '<b><font size="6px" color="#009900">' + tss + '</font></b>'; //ISS 得分
+            document.getElementById("isstableid").rows.item(2).cells.item(1).innerHTML = '<font size="6px" color="#009900"><b>' + trs + '</b></font>';//TRS 得分
+            document.getElementById("isstableid").rows.item(2).cells.item(2).innerHTML = '<font size="6px" color="#009900"><b>' + triss + '</b></font>';//TRISS 得分
+            document.getElementById("isstableid").rows.item(2).cells.item(3).innerHTML = '<font size="6px" color="#009900"><b>' + dcs + '</b></font>'; //钝挫伤
+            document.getElementById("isstableid").rows.item(2).cells.item(4).innerHTML = '<font size="6px" color="#009900"><b>' + gcs + '</b></font>'; //贯穿伤
+
+        };
+    </script>
+</head>
+
+<body>
+<table id="isstableid" width="430" height="150" border="1" cellpadding="0"
+       style="border: solid 1px #B5B8C8;border-collapse:collapse;">
+    <tr>
+        <td colspan="3" align="center" width="50%" bgcolor="#F5F5F5"><b>得分</b></td>
+        <td colspan="2" align="center" width="50%" bgcolor="#F5F5F5"><b>死亡率</b></td>
+    </tr>
+    <tr>
+        <td width="86" align="center" bgcolor="#F5F5F5"><b>ISS</b></td>
+        <td width="86" align="center" bgcolor="#F5F5F5"><b>RTS</b></td>
+        <td width="86" align="center" bgcolor="#F5F5F5"><b>TRISS</b></td>
+        <td width="86" align="center" bgcolor="#F5F5F5"><b>钝挫伤</b></td>
+        <td width="86" align="center" bgcolor="#F5F5F5"><b>贯穿伤</b></td>
+    </tr>
+    <tr>
+        <td height="79" align="center"></td>
+        <td align="center"></td>
+        <td align="center"></td>
+        <td align="center"></td>
+        <td align="center"></td>
+    </tr>
+</table>
+</body>
+</html>

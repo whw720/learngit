@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="lib/bootstrap/js/jquery.min.js"></script>
+    <script type="text/javascript">
+        var webRoot = '<%=webRoot%>';
+        if(typeof JSON == 'undefined'){$('head').append($("<script type='text/javascript' src='lib/bootstrap/js/json2.js'>"));}
+    </script>
+</head>
+<body>
+<div class="commPage login" >
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#loginBtn").click(function () {
+            var options = {
+                url: webRoot+'/loginother',
+                type: 'post',
+                dataType: 'text',
+                data: $("#form1").serialize(),
+                success: function (data) {
+                    var result=JSON.parse(data);
+                    if (result.data.login){
+                        alert('重量密码成功，密码默认为000000');
+                        window.location.href=webRoot+'/index';
+                    }else{
+                        alert('重量密码失败，请核对用户名与电话');
+                    }
+
+                }
+            };
+            $.ajax(options);
+            return false;
+        });
+    });
+</script>
+
+<form id="form1" method="post">
+    <table style="padding-top: 220px;padding-left: 550px;">
+        <tr>
+            <td colspan="2" style="text-align: left;">
+                <h4>请使用用户名和电话进行登录</h4>
+            </td>
+        </tr>
+        <tr>
+            <td>用户名:</td>
+            <td>
+                <input type="text" name="name" /></td>
+        </tr>
+        <tr>
+            <td>电话:</td>
+            <td>
+                <input type="text" name="phone" /></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="align-content: center">
+                <input style="width: 80px;" id="loginBtn" type="submit" value="重量密码" />&nbsp;&nbsp;&nbsp;
+                尚未报名?<a href="/startsign">请点此</a>
+            </td>
+        </tr>
+    </table>
+</form>
+<label id="responseText"></label>
+    </div>
+</body>
+</html>

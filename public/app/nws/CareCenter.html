@@ -1,0 +1,286 @@
+<!--监护中心页面-->
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../../lib/extjs/resources/css/ext-all-neptune.css" />
+    <link rel="stylesheet" type="text/css" href="css/CareCenter.css" />
+    <!-- 工具js -->
+    <script src="../../lib/extjs/ext-all-debug.js"></script>
+    <script type="text/javascript" src="../../lib/extjs/locale/ext-lang-zh_CN.js"></script>
+    <script src="../../lib/js/math-uuid.js"></script>
+    <script src="../../lib/graphlive/import.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="../common/ajax-request.js"></script>
+</head>
+<body style="overflow-x:hidden;" oncontextmenu="return false">
+    <table id="vitalSignTable" class="vitalSignTable">
+        <!--生命体征-->
+        <tr id="vitalSignTr">
+            <td class="vitalSignTd vitalSignColumn1 cellColor vitalSignFirstRowTd">
+                生命体征
+            </td>
+            <td class="vitalSignTd vitalSignColumn2 vitalSignFirstRowTd" style="text-align: left;">
+                <table id="vitalSignLegendTable" class="vitalSignTable" style="width: 100%; height: 100%; border: 0px; table-layout:fixed;">
+                    <tr>
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn1 vitalSignLegendCellFirstRow" rowspan="13">
+                            <table id="vitalSignLegendCellTable" class="vitalSignTable">
+                                <tr><td class="vitalSignLegendCell vitalSignLegendCellColumn1 vitalSignLegendCellMiddleRow">SBP ^ mmHg</td></tr>
+                                <tr><td class="vitalSignLegendCell vitalSignLegendCellColumn1 vitalSignLegendCellMiddleRow">DBP ^ mmHg</td></tr>
+                                <tr><td class="vitalSignLegendCell vitalSignLegendCellColumn1 vitalSignLegendCellMiddleRow">LAP x mmHg</td></tr>
+                                <tr><td class="vitalSignLegendCell vitalSignLegendCellColumn1 vitalSignLegendCellMiddleRow">HR ● 次/分</td></tr>
+                                <tr><td class="vitalSignLegendCell vitalSignLegendCellColumn1 vitalSignLegendCellMiddleRow">T(腋) x ℃</td></tr>
+                                <tr><td class="vitalSignLegendCell vitalSignLegendCellColumn1 vitalSignLegendCellMiddleRow">(肛) ○ ℃</td></tr>
+                                <tr><td class="vitalSignLegendCell vitalSignLegendCellColumn1 vitalSignLegendCellMiddleRow">CVP ● mmHg</td></tr>
+                            </table>
+                        </td>
+
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn4 vitalSignLegendCellFirstRow"><div class="labelTitleDiv">℃</div></td>
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn2 vitalSignLegendCellFirstRow"><div class="labelTitleDiv" style="-webkit-transform: scale(0.85, 1);">SpO2</div></td>
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn3 vitalSignLegendCellFirstRow"><div class="labelTitleDiv">通用</div></td>
+                    </tr>
+                    <tr>
+
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn4 vitalSignLegendCellMiddleRow">&nbsp;</td>
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn3 vitalSignLegendCellMiddleRow">&nbsp;</td>
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn3 vitalSignLegendCellMiddleRow"><div class="labelDiv">200</div></td>
+                    </tr>
+                    <tr>
+
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn4 vitalSignLegendCellMiddleRow">&nbsp;</td>
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn3 vitalSignLegendCellMiddleRow"><div class="labelDiv">100</div></td>
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn3 vitalSignLegendCellMiddleRow"><div class="labelDiv">180</div></td>
+                    </tr>
+                    <tr>
+
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn4 vitalSignLegendCellMiddleRow ">&nbsp;</td>
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn3 vitalSignLegendCellMiddleRow"><div class="labelDiv">98</div></td>
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn3 vitalSignLegendCellMiddleRow"><div class="labelDiv">160</div></td>
+                    </tr>
+                    <tr>
+
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn4 vitalSignLegendCellMiddleRow ">&nbsp;</td>
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn3 vitalSignLegendCellMiddleRow"><div class="labelDiv">96</div></td>
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn3 vitalSignLegendCellMiddleRow"><div class="labelDiv">140</div></td>
+                    </tr>
+                    <tr>
+
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn4 vitalSignLegendCellMiddleRow temperatureCell">&nbsp;</td>
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn3 vitalSignLegendCellMiddleRow"><div class="labelDiv">94</div></td>
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn3 vitalSignLegendCellMiddleRow"><div class="labelDiv">120</div></td>
+                    </tr>
+                    <tr>
+
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn4 vitalSignLegendCellMiddleRow temperatureCell"><div class="labelDiv">41</div>
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn3 vitalSignLegendCellMiddleRow"><div class="labelDiv">92</div></td>
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn3 vitalSignLegendCellMiddleRow"><div class="labelDiv">100</div></td>
+                    </tr>
+                    <tr>
+
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn4 vitalSignLegendCellMiddleRow temperatureCell"><div class="labelDiv">40</div></td>
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn3 vitalSignLegendCellMiddleRow"><div class="labelDiv">90</div></td>
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn3 vitalSignLegendCellMiddleRow"><div class="labelDiv">80</div></td>
+                    </tr>
+                    <tr>
+
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn4 vitalSignLegendCellMiddleRow temperatureCell"><div class="labelDiv">39</div></td>
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn3 vitalSignLegendCellMiddleRow"><div class="labelDiv">88</div></td>
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn3 vitalSignLegendCellMiddleRow"><div class="labelDiv">60</div></td>
+                    </tr>
+                    <tr>
+
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn4 vitalSignLegendCellMiddleRow temperatureCell"><div class="labelDiv">38</div></td>
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn3 vitalSignLegendCellMiddleRow"><div class="labelDiv">86</div></td>
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn3 vitalSignLegendCellMiddleRow"><div class="labelDiv">40</div></td>
+                    </tr>
+                    <tr>
+
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn4 vitalSignLegendCellMiddleRow temperatureCell"><div class="labelDiv">37</div></td>
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn3 vitalSignLegendCellMiddleRow"><div class="labelDiv">84</div></td>
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn3 vitalSignLegendCellMiddleRow"><div class="labelDiv">20</div></td>
+                    </tr>
+                    <tr>
+
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn4 vitalSignLegendCellMiddleRow temperatureCell"><div class="labelDiv">36</div></td>
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn3 vitalSignLegendCellMiddleRow"><div class="labelDiv">82</div></td>
+                        <td class="vitalSignLegendCell vitalSignLegendCellColumn3 vitalSignLegendCellMiddleRow"><div class="labelDiv">10</div></td>
+                    </tr>
+                </table>
+            </td>
+            <td id="vitalSignTd" class="vitalSignTd canvasPadding vitalSignFirstRowTd">
+                <div id="timelineDIV" class="timeline">
+                </div>
+                <!--生命体征绘图区-->
+                <div id="vitalSignCanvasDiv" style="width: 100%; height: 100%;">
+                </div>
+            </td>
+        </tr>
+        <!--神志-->
+        <tr>
+            <td class="vitalSignTd vitalSignColumn1 cellColor">
+                神志
+            </td>
+            <td class="vitalSignTd vitalSignColumn2">
+                <table id="consciousnessLegendTable" class="vitalSignTable">
+                    <tr>
+                        <td class="vitalSignTd consciousnessLengendCell ganttCell" colspan="2">意识</td>
+                        <td class="vitalSignTd consciousnessLengendCell consciousnessLengendStarCell ganttCell"><img src="images/star.png"></td>
+                    </tr>
+                    <tr>
+                        <td class="vitalSignTd consciousnessLengendCell ganttCell" colspan="2">评分</td>
+                        <td class="vitalSignTd consciousnessLengendCell consciousnessLengendStarCell ganttCell"><img src="images/star.png"></td>
+                    </tr>
+                    <tr>
+                        <td class="vitalSignTd consciousnessLengendCell consciousnessLengendMergeCell">瞳孔</td>
+                        <td colspan="2" class="cellPadding">
+                            <table class="vitalSignTable">
+                                <tr>
+                                    <td class="vitalSignTd consciousnessLengendSplitCell ganttTdTableCell">左</td>
+                                </tr>
+                                <tr>
+                                    <td class="vitalSignTd consciousnessLengendSplitCell consciousnessLengendBottomCell ganttCell">右</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="vitalSignTd consciousnessLengendCell ganttCell" colspan="3">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="vitalSignTd consciousnessLengendCell consciousnessLengendBottomCell ganttCell" colspan="3">&nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+            <td id="consciousnessTd" class="vitalSignTd canvasPadding">
+                <!--神志绘图区-->
+                <div id="consciousnessCanvasDiv" style="width: 100%; height: 100%;">
+                </div>
+            </td>
+        </tr>
+        <!--入量-->
+        <tr>
+            <td class="vitalSignTd vitalSignColumn1 cellColor">
+                入量
+            </td>
+            <td class="vitalSignTd vitalSignColumn2" >
+                <table id="inputLegendTable" class="vitalSignTable">
+                    <tr>
+                        <td class="vitalSignTd consciousnessLengendCell ganttCell">鼻饲药+水</td>
+                    </tr>
+                    <tr>
+                        <td class="vitalSignTd consciousnessLengendCell ganttCell">鼻饲粥</td>
+                    </tr>
+                    <tr>
+                        <td class="vitalSignTd consciousnessLengendCell ganttCell">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="vitalSignTd consciousnessLengendCell ganttCell">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="vitalSignTd consciousnessLengendCell ganttCell">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="vitalSignTd consciousnessLengendCell consciousnessLengendBottomCell ganttCell">&nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+            <td id="inputTd" class="vitalSignTd canvasPadding">
+                <!--入量绘图区-->
+                <div id="inputCanvasDiv" style="width: 100%; height: 100%;">
+                </div>
+            </td>
+        </tr>
+        <!--出量-->
+        <tr>
+            <td class="vitalSignTd vitalSignColumn1 cellColor">
+            出量
+        </td>
+            <td class="vitalSignTd vitalSignColumn2" >
+                <table id="outputLegendTable" class="vitalSignTable">
+                    <tr>
+                        <td class="vitalSignTd consciousnessLengendCell ganttCell">尿管</td>
+                    </tr>
+                    <tr>
+                        <td class="vitalSignTd consciousnessLengendCell ganttCell">腹管</td>
+                    </tr>
+                    <tr>
+                        <td class="vitalSignTd consciousnessLengendCell ganttCell">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="vitalSignTd consciousnessLengendCell ganttCell">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="vitalSignTd consciousnessLengendCell ganttCell">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="vitalSignTd consciousnessLengendCell consciousnessLengendBottomCell ganttCell">&nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+            <td id="outputTd" class="vitalSignTd canvasPadding">
+                <!--入量绘图区-->
+                <div id="outputCanvasDiv" style="width: 100%; height: 100%;">
+                </div>
+            </td>
+        </tr>
+        <!--护理措施-->
+        <tr>
+            <td class="vitalSignTd vitalSignColumn1 cellColor">
+                护理措施
+            </td>
+            <td class="vitalSignTd vitalSignColumn2" >
+                <table id="nursingLegendTable" class="vitalSignTable">
+                    <tr>
+                        <td class="vitalSignTd consciousnessLengendCell ganttCell">辅助呼吸</td>
+                    </tr>
+                    <tr>
+                        <td class="vitalSignTd consciousnessLengendCell ganttCell">行肢体功能锻炼</td>
+                    </tr>
+                    <tr>
+                        <td class="vitalSignTd consciousnessLengendCell ganttCell">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="vitalSignTd consciousnessLengendCell ganttCell">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="vitalSignTd consciousnessLengendCell ganttCell">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="vitalSignTd consciousnessLengendCell consciousnessLengendBottomCell ganttCell">&nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+            <td id="nursingTd" class="nursingTd canvasPadding">
+                <!--护理绘图区-->
+                <div id="nursingCanvasDiv" style="width: 100%; height: 100%;">
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
+<!-- 程序js -->
+<script src="Date.js"></script>
+<script src="carecentergraphlive/PublicFunction.js"></script>
+<script src="carecentergraphlive/Labels.js"></script>
+<script src="carecentergraphlive/GraphLiveParent.js"></script>
+<script src="carecentergraphlive/SerialGraphLive.js"></script>
+<script src="carecentergraphlive/LegendGraphLive.js"></script>
+<script src="CareCenterSerialGraphLive.js"></script>
+<script src="CareCenterLegendGraphLive.js"></script>
+<script src="CareCenter.js"></script>
+<script>
+    var careCenter = new com.dfsoft.icu.CareCenter();
+    //初始化
+    careCenter.init();
+    //窗口改变大小
+    window.onresize = function(){
+        careCenter.onresize();
+    };
+    //启动监听程序
+    careCenter.receiveDataByTime(io.connect());
+    //隐藏loadmask
+    if (window.parent.Ext.getCmp(nwsAppId).loadMask) {
+        window.parent.Ext.getCmp(nwsAppId).loadMask.hide();
+    }
+    window.parent.Ext.getCmp(careCenterPanelId).loadMask.hide();
+</script>

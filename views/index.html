@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title><%= title %></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="lib/bootstrap/js/jquery.min.js"></script>
+    <script type="text/javascript">
+        var webRoot = '<%=webRoot%>';
+        if(typeof JSON == 'undefined'){$('head').append($("<script type='text/javascript' src='lib/bootstrap/js/json2.js'>"));}
+    </script>
+</head>
+
+
+<body>
+
+<script type="text/javascript">
+    var userInfo = '<%=userInfo%>';
+    var webRoot = '<%=webRoot%>';
+    var username="";
+
+    $(document).ready(function () {
+
+        $("#btnAjaxSubmit").click(function () {
+            var name=$("#name").val();
+            var password=$("#password").val();
+            var passwordagain=$("#passwordagain").val();
+            var phone=$("#phone").val();
+            var compet=$("input[name='compet']:checked").val();
+            if(name==null||name==''){
+                alert('用户名不能为空');
+                return false;
+            }
+            if(password==null||password==''){
+                alert('密码不能为空');
+                return false;
+            }
+            if(!(password.length>=4&&password.length<=12)){
+                alert('密码位数应该在4到12个字符内');
+                return false;
+            }
+            if(password!=passwordagain){
+                alert('两次密码输入不一致');
+                return false;
+            }
+            if(phone==null||phone==''){
+                alert('联系电话不能为空');
+                return false;
+            }
+            if(compet==null||compet==''){
+                alert('请选择要报名的比赛');
+                return false;
+            }
+
+            var options = {
+                url: webRoot+'/sign',
+                type: 'post',
+                dataType: 'text',
+                data: $("#form1").serialize(),
+                success: function (data) {
+                    var result=JSON.parse(data);
+                    if (result.data.sign){
+                        alert('报名成功');
+                        $("input[type=reset]").trigger("click");
+                        window.location.href=webRoot+'/welcome';
+                    }else{
+                        alert('报名失败，该用户名和电话已经被占用');
+                    }
+                }
+            };
+            $.ajax(options);
+            return false;
+        });
+        $("#grade").blur(function () {
+            var gradeV=$(this).val();
+            if(gradeV!=null&&gradeV!=''){
+                var arry1=['1','2','3','1年级','2年级','3年级','一年级','二年级','三年级','一','二','三'];
+                var arry2=['4','5','6','4年级','5年级','6年级','四年级','五年级','六年级','四','五','六'];
+                var arry3=['7','8','9','7年级','8年级','9年级','七年级','八年级','九年级','七','八','九','初中','初一','初二','初三'];
+                for(var a in arry1){
+                    if(gradeV==arry1[a]){
+                        $("input[name='compet'][value='1']").attr("checked",true);
+                    }
+                }
+                for(var a in arry2){
+                    if(gradeV==arry2[a]){
+                        $("input[name='compet'][value='2']").attr("checked",true);
+                    }
+                }
+                for(var a in arry3){
+                    if(gradeV==arry3[a]){
+                        $("input[name='compet'][value='3']").attr("checked",true);
+                    }
+                }
+
+            }
+        });
+
+    });
+</script>
+<div class="commPage register" >
+<form id="form1" method="post">
+    <table border="0" class="loginTable" style="width:300px;padding-top: 140px;padding-left: 550px;">
+        <tr>
+            <td><div style="width: 70px;"> 姓名：</div></td>
+            <td><div style="width: 220px;">
+                <input type="text" name="name" id="name" /></div></td>
+            <td><div style="color: red;width: 10px;">*</div></td>
+        </tr>
+        <tr>
+            <td>密码：</td>
+            <td>
+                <input type="password" name="password" id="password" /></td>
+            <td><div style="color: red;">*</div></td>
+        </tr>
+        <tr>
+            <td>再次输入：</td>
+            <td>
+                <input type="password" name="passwordagain" id="passwordagain" /></td>
+            <td><div style="color: red;">*</div></td>
+        </tr>
+        <tr>
+            <td>性 别：</td>
+            <td>
+                <input type="radio" name="gender" value="1" style="width: 25px;height: 20px;"/>男&nbsp;&nbsp;
+                <input type="radio" name="gender" value="0" style="width: 25px;height: 20px;"/>女
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>联系方式：</td>
+            <td>
+                <input type="text" name="phone" id="phone" /></td>
+            <td><div style="color: red;">*</div></td>
+        </tr>
+        <tr>
+            <td>年级：</td>
+            <td>
+                <input type="text" name="grade" id="grade" /></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>学校：</td>
+            <td>
+                <input type="text" name="school" id="school" /></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>报名比赛：</td>
+            <td>
+                <input type="radio" name="compet" value="1" style="width: 25px;height: 20px;"/>小低组
+                <input type="radio" name="compet" value="2" style="width: 25px;height: 20px;"/>小高组
+                <input type="radio" name="compet" value="3" style="width: 25px;height: 20px;"/>初中组
+
+            </td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td colspan="3" style="text-align: center">
+                <span style="color: gray;font-size: 12px;padding-left: 10px;">
+                    提示: 小低组(2—4年级);小高组(5—6年级);初中组(7—9年级 也称初一到初三)</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" style="text-align: center">
+                <div style="text-align: left;padding-left: 80px;">
+                    <input id="btnAjaxSubmit" type="submit" value="报名" style="width: 80px;" />
+                <input type="reset" style="display:none;" /></div>
+            </td>
+        </tr>
+    </table>
+</form>
+<label id="responseText"></label>
+    </div>
+</body>
+
+</html>

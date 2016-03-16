@@ -1,0 +1,181 @@
+.x-boxselect.x-form-text {
+    cursor: text;
+    padding: 0;
+    overflow-y: auto;
+}
+
+.x-boxselect ul.x-boxselect-list {
+    padding: 0px 3px;
+    margin: 0;
+}
+
+ul.x-boxselect-list.x-boxselect-singleselect {
+    /*white-space: nowrap;*/
+    overflow: hidden;
+}
+
+.x-boxselect-input, .x-boxselect-item {
+    display: inline-block;
+    position: relative;
+    word-wrap: break-word;
+    word-break: normal;
+    *display: inline; /* IE7 */
+    zoom: 1; /* IE */
+}
+
+.x-boxselect-input input, .x-boxselect-input div {
+    border: none;
+    background: none;
+    line-height: 19px !important;
+    height: 19px;
+    width: 100%;
+}
+
+.x-boxselect-emptyinput {
+    display: none;
+}
+
+.x-boxselect-stacked .x-boxselect-item {
+    display: block;
+}
+
+.x-boxselect-item {
+    position: relative;
+    border-radius: 0;
+    padding: 0px 3px 0px 1px !important;
+    margin: 1px;
+    background: none;
+    cursor: default;
+    color: darkgreen;
+}
+
+.x-field:not(.x-item-disabled) .x-boxselect-item:hover {
+    background: #BBCEF1;
+    z-index: 10;
+}
+
+.x-field:not(.x-item-disabled) .x-boxselect-item.selected {
+    background: #005AFF !important;
+    color: #fff;
+    z-index: 10;
+}
+
+.x-boxselect-item-text {
+    line-height: 16px;
+}
+
+.x-boxselect-item-close {
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: -2px;
+    width: 9px;
+    height: 11px;
+    font-size: 12px;
+    border-radius: 6px;
+    background: url(/images/del.png) center center no-repeat;
+    line-height: 11px;
+    text-align: center;
+}
+
+.x-field:not(.x-item-disabled) .x-boxselect-item.selected .x-boxselect-item-close, .x-field:not(.x-item-disabled) .x-boxselect-item:hover .x-boxselect-item-close {
+    display: block;
+    color: #fff;
+}
+
+.x-boxselect-hideselections .x-boundlist-selected {
+    display: none;
+}
+
+.mulitInput .x-form-trigger-wrap {
+    border: 0;
+    width: 100%;
+    border-bottom: 1px dotted #006400;
+}
+
+.mulitInput .x-form-trigger-wrap-focus .x-form-trigger-wrap {
+    border-color: #006400;
+}
+
+.mulitInput .x-form-trigger-wrap .x-form-text {
+    background: none;
+}
+
+.x-boxselect-picker {
+    margin-top: 1px;
+    border: 0;
+}
+
+.mulitInput .x-boxselect-item-text {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: clip;
+    line-height: 19px;
+    height: 100%;
+}
+
+.x-field.mulitInput {
+    line-height: 19px !important;
+    height: 18px;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -12px;
+}
+
+.mulitInput .x-boxselect-input input, .mulitInput .x-boxselect-input div {
+    line-height: 19px !important;
+    height: 19px;
+    font-family: helvetica, arial, verdana, sans-serif, '宋体' !important;
+}
+
+.mulitInput .x-boxselect-input .x-boxselect-emptyinput {
+    color: rgb(170, 170, 170);
+    height: 17px;
+    line-height: 24px !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.mulitInput .x-boxselect-item {
+    position: relative;
+    border-radius: 0;
+    padding: 0 !important;
+    margin: 0;
+    top: 2px;
+    background: none;
+    cursor: default;
+    color: darkgreen;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.mulitInput .x-boxselect-input {
+    height: 18px;
+    padding: 0 0 0 0;
+}
+
+.mulitInput .x-form-empty-field {
+    position: relative;
+    top: 1px;
+}
+
+.mulitInput {
+    font-family: helvetica, arial, verdana, sans-serif, '宋体' !important;
+}
+
+.reEditDiv {
+    padding: 0 5px 0 0;
+    position: relative;
+}
+
+.reEditDiv:after {
+    content: ';';
+    position: absolute;
+    right: 2px;
+    width: 3px;
+    height: 100%;
+    top: 0;
+}

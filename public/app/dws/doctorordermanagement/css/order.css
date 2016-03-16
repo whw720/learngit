@@ -1,0 +1,89 @@
+.dws-order-add {
+    background-image: url(../images/add.png);
+}
+.dws-order-refresh{
+    background-image: url(../images/refresh.png);
+}
+.dws-tree-dept{
+    background-image: url(../images/tree-dept.png);
+}
+.dws-delete{
+    background-image: url(../images/delete.png);
+}
+.dws-recycle{
+    background-image: url(../images/recycle.png);
+}
+.dws-order-back{
+    background-image: url(../images/back.png);
+}
+.dws-doctor-order-td-right{
+    vertical-align: middle;
+    padding-left:1px;
+}
+.dws-doctor-order-td-right div{
+    padding-left:1px;
+    padding-right:1px;
+}
+.dws-doctor-order-td{
+    vertical-align: middle;
+    padding-left:1px;
+}
+.dws-doctor-order-td div{
+    padding:1px;
+}
+.dws-doctor-order-column{
+    text-align: center;
+}
+.dws-doctor-order-column div{
+    padding-left:1px;
+    padding-right:1px;
+}
+.dws-content_a { text-decoration: none;}
+.dws-content_a:active { text-decoration:blink}
+.dws-content_a:hover { text-decoration:underline;cursor:pointer;}
+.dws-content_a:visited { text-decoration: none;}
+
+.dws-archives-process-green {
+    border: solid 1px darkgreen;
+    height: 5px;
+    width: 32px;
+    cursor:pointer;
+    padding:0px !important;
+    margin-top: 1px;
+    margin-left: 1px;
+    position:relative;
+}
+.dws-archives-process-inner-green {
+    height: 3px;
+    width: 0px;
+    padding: 0px !important;
+    background-color: rgba(0, 128, 0, .6);
+    background:-webkit-gradient(linear, 0 0, 100% 0, from(#00ff00), to(#006400));
+    opacity: .6;
+    position:relative;
+}
+.dws-archives-process-red {
+    border: solid 1px darkred;
+    height: 5px;
+    width: 32px;
+    cursor:pointer;
+    padding-left:0px !important;
+    padding-right:0px !important;
+    padding-top:0px !important;
+    padding-bottom:0px !important;
+    margin-top: 1px;
+    margin-left: 1px;
+    position:relative;
+}
+.dws-archives-process-inner-red {
+    height: 3px;
+    width: 0px;
+    padding-left:0px !important;
+    padding-right:0px !important;
+    padding-top:0px !important;
+    padding-bottom:0px !important;
+    background-color: rgba(0, 128, 0, .6);
+    background:-webkit-gradient(linear, 0 0, 100% 0, from(#ffff00), to(#ff0000));
+    opacity: .6;
+    position:relative;
+}

@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<style type="text/css">
+    .html-body-overflow
+    {
+        overflow-x:hidden;
+        overflow-y:hidden;
+    }
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="/lib/extjs/resources/css/ext-all-neptune.css" />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+<script type="text/javascript" src="/lib/extjs/ext-all.js"></script>
+<script type="text/javascript" src="/lib/extjs/locale/ext-lang-zh_CN.js"></script>
+<script type="text/javascript" src="/lib/extjs/ext-theme-neptune.js"></script>
+<script type="text/javascript">
+var webRoot = '<%=webRoot%>';
+window.onload = function() {
+    Ext.onReady(
+            function() {
+                var width = window.innerWidth-200;
+                var height = window.innerHeight-100;
+                var store = null,me=this;
+
+                me.startDatefield=Ext.widget({
+                    xtype:'datefield',
+                    fieldLabel:'操作日期',
+                    labelWidth:60,
+                    format:'Y-m-d',
+                    value:Ext.Date.format(new Date(),'Y-m-01'),
+                    width:180,
+                    editable:false
+                });
+                me.endDatefield=Ext.widget({
+                    xtype:'datefield',
+                    format:'Y-m-d',
+                    value:new Date(),
+                    width:110,
+                    editable:false
+                });
+                Ext.define('schedulTypeModel',{
+                    extend : 'Ext.data.Model',
+                    fields : [{
+                        name: 'NAME',
+                        type: 'string'
+                    },{
+                        name: 'PHONE',
+                        type: 'string'
+                    }, {
+                        name: 'GRADE',
+                        type: 'string'
+                    }, {
+                        name: 'SCHOOL',
+                        type: 'string'
+                    }, {
+                        name: 'COMPET',
+                        type: 'string'
+                    }, {
+                        name: 'OPERTIME',
+                        type: 'date'
+                    }, {
+                        name: 'MEMO',
+                        type: 'string'
+                    }, {
+                        name: 'ID',
+                        type: 'string'
+                    }]
+                });
+
+                    store = Ext.create('Ext.data.Store', {
+                        model: 'schedulTypeModel',
+                        autoLoad: true,
+                        proxy: {
+                            type: 'ajax',
+                            url: webRoot + '/queryloginlog',
+                            actionMethods: { read: 'POST' },
+                            reader: {
+                                type: 'json',
+                                root: 'data',
+                                totalProperty: 'totalCount'
+                            }
+                        }
+                    });
+
+                Ext.create('Ext.grid.Panel',{
+                    columnLines: true,
+                    multiSelect : true,
+                    title:'查询报名系统日志',
+                    enableColumnHide:false,
+                    store: store,
+                    bbar:Ext.create('Ext.PagingToolbar', {
+                        store: store,
+                        displayMsg: '共{2}条',
+                        displayInfo: true,
+                        emptyMsg: '无数据'
+                    }),
+                    width:width,
+                    height:height,
+                    renderTo: Ext.getBody(),
+                    columns:[{
+                        text:'考生姓名',
+                        width:100,
+                        dataIndex: 'NAME'
+                    },{
+                        text:'年级',
+                        width:120,
+                        dataIndex: 'GRADE'
+                    },{
+                        text:'学校',
+                        width:120,
+                        dataIndex: 'SCHOOL'
+                    },{
+                        text:'登录时间',
+                        width:180,
+                        dataIndex: 'OPERTIME',
+                        renderer	: 	function(value, meta,record){
+                            var dates=String(Ext.Date.format(new Date(value), 'Y-m-d H:i:s'));
+                            return dates
+                        }
+                    },{
+                        text:'操作',
+                        width:120,
+                        dataIndex: 'MEMO'
+                    }],
+                    dockedItems:[{
+                        xtype: 'toolbar',
+                        dock: 'top',
+                        items: ['->',{
+                            xtype: 'textfield',
+                            id: 'grade',
+                            width: 150,
+                            maxLength:100,
+                            maxLengthText:"最长允许输入100个字符",
+                            fieldLabel: '年级',
+                            labelWidth: 58,
+                            labelAlign: 'right'
+                        },{
+                            xtype: 'textfield',
+                            id: 'school',
+                            width: 150,
+                            maxLength:100,
+                            maxLengthText:"最长允许输入100个字符",
+                            fieldLabel: '学校',
+                            labelWidth: 58,
+                            labelAlign: 'right'
+                        },me.startDatefield,'<span style="margin-left: -6px;">至</span>',me.endDatefield,{
+                            xtype: 'button',
+                            tooltip : '查询',
+                            text: '查询',
+                            handler : function(){
+                                var starttime=me.startDatefield.getValue();
+                                var endtime=me.endDatefield.getValue();
+                                var grade=Ext.getCmp('grade').getValue();
+                                var school=Ext.getCmp('school').getValue();
+                                store.on('beforeload', function (_store, options) {
+                                    Ext.apply(_store.proxy.extraParams, {
+                                        starttime:starttime,
+                                        endtime:endtime,
+                                        grade:grade,
+                                        school:school
+                                    });
+                                });
+                                store.loadPage(1);
+                            }
+                        }]
+                    }]
+                });
+            }
+    );
+};
+
+</script>
+</head>
+<body oncontextmenu=self.event.returnValue=false>
+</body>
+</html>

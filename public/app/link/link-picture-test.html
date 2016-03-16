@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>取影像</title>
+    <script type="text/javascript" src="/lib/extjs/ext-all-debug.js"></script>
+    <script>
+        testpic=function(){
+//            var model = document.getElementByName("picture_model").getValue();
+//            var provider = document.getElementByName("picture_provider").getValue();
+//            var timestamp = document.getElementByName("picture_timestamp").getValue();
+//            var identifier = document.getElementByName("picture_identifier").getValue();
+//            var timestampEnd = document.getElementByName("picture_timestampEnd").getValue();
+//
+//            alert(model);
+//            alert(provider);
+//            alert(timestamp);
+//            alert(identifier);
+//            alert(timestampEnd);
+
+
+            Ext.Ajax.request({
+                url: '/link/drug/requestSyncPicture/'+"334"+'/'+"333"+'/'+"123"+'/'+"123",
+                method: 'GET',
+                success: function (response) {
+                    var reqmsg = Ext.decode(response.responseText);
+                    if (reqmsg.success === true) {
+
+                       // me.load(reqmsg.data, patientId, scoreCode);
+                    } else {
+                        request.showErr(reqmsg.errors, '加载');
+                    }
+                }
+            });
+
+
+        }
+
+    </script>
+</head>
+<body>
+<form name="form1" method="post" action="">
+    <label for="picture_model">model</label>
+    <input name="picture_url" type="text" id="picture_model" value="PACS"> &nbsp;&nbsp;&nbsp;&nbsp;</br></br>
+    <label for="picture_provider">provider</label>
+    <input name="picture_url" type="text" id="picture_provider" value="pacs-picture"> &nbsp;&nbsp;&nbsp;&nbsp;</br></br>
+    <label for="picture_timestamp">timestamp</label>
+    <input name="picture_url" type="text" id="picture_timestamp" value="null"> &nbsp;&nbsp;&nbsp;&nbsp;</br></br>
+    <label for="picture_identifier">identifier</label>
+    <input name="picture_url" type="text" id="picture_identifier" value="null"> &nbsp;&nbsp;&nbsp;&nbsp;</br></br>
+    <label for="picture_timestampEnd">timestampEnd</label>
+    <input name="picture_url" type="text" id="picture_timestampEnd" value="null"> &nbsp;&nbsp;&nbsp;&nbsp;</br></br>
+    <input name="取影像" type="button" value="取影像" onclick="testpic();">
+</form>
+</body>
+</html>
