@@ -1,0 +1,10 @@
+#config fie
+lancet-config.js
+
+#windows
+Thumbs.db
+Desktop.ini
+
+#project
+*.svn
+
