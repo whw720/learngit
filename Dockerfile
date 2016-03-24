@@ -17,5 +17,5 @@ ADD . /src
 # Install app dependencies
 RUN cd /src; 
 
-EXPOSE 4000 
+EXPOSE 5000 
 CMD ["node", "/src/lancet-icu.js"]
