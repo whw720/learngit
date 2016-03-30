@@ -17,6 +17,13 @@ var controllers = require('./controllers'),
 module.exports = function (app) {
 
     //首页
+    app.get('/',function(req,res){
+	res.render('hello',{
+		title:'welcome here'
+		
+	});
+	});
+    app.get('/weixin', controllers.weixin);
     app.get('/startsign', controllers.index);
     app.post('/sign',login.insertStudent);
 
