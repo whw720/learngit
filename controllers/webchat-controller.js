@@ -5,14 +5,34 @@ exports.getAccessToken=function(req,res){
 }
 exports.receiveMsg=function(req,res){
 	console.log(req.body);
-	parseXML(req.body.data,function(msg){
-		var receiveMsg=sendMsg(msg);
-	        console.log(msg);
-        	console.log(receiveMsg);
-        	res.end(receiveMsg);
+	console.log(req.body.data);
+	var post_data="";
+	req.on('data',function(data){post_data=data;});
+	req.on('end',function(){
+	parseXML(post_data.toString('utf-8',0,post_data.length),function(msg){
+                var receiveMsg=sendMsg(msg);
+                console.log(msg);
+                console.log(receiveMsg);
+                res.end(receiveMsg);
+
+        });
 
 	});
 }
+function test(){
+var str=" <xml>"+
+            "<ToUserName><![CDATA[toUser]]></ToUserName>"+
+            "<FromUserName><![CDATA[fromUser]]></FromUserName>"+
+            "<CreateTime>1348831860</CreateTime>"+
+            " <MsgType><![CDATA[text]]></MsgType>"+
+            "<Content><![CDATA[this is a test]]></Content>"+
+            " <MsgId>1234567890123456</MsgId>"+
+            " </xml>";
+   parseXML(str,function(msg){
+	console.log(msg);
+	});
+}
+test();
 function sendMsg(rece){
 	var CreateTime=parseInt(new Date().getTime() / 1000);
 	var msg="";
@@ -23,7 +43,7 @@ function sendMsg(rece){
 		return sendMessage;
 	}
 }
-function parseXML(xml,callback){
+function parseXML(xmlstr,callback){
 	// 定义解析存储变量
 	var msgJson={
 	  ToUserName:"",
@@ -64,5 +84,5 @@ function parseXML(xml,callback){
 	     callback(msgJson);
 	      });
 	  });
-	  parse.parseString(xml);
+	  parse.parseString(xmlstr);
 }
