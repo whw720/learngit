@@ -5,14 +5,19 @@ exports.getAccessToken=function(req,res){
 }
 exports.receiveMsg=function(req,res){
 	console.log(req.body);
+	console.log('-------------------body end -----------');
 	console.log(req.body.data);
+	console.log('-------------------------body data end -----------');
 	var post_data="";
 	req.on('data',function(data){post_data=data;});
 	req.on('end',function(){
 	parseXML(post_data.toString('utf-8',0,post_data.length),function(msg){
                 var receiveMsg=sendMsg(msg);
+		console.log('----------------------------msg---------------');
                 console.log(msg);
+		console.log('------------------------msg end------------');
                 console.log(receiveMsg);
+		console.log('------------------------recevieMsg end-----------');
                 res.end(receiveMsg);
 
         });
@@ -29,17 +34,15 @@ var str=" <xml>"+
             " <MsgId>1234567890123456</MsgId>"+
             " </xml>";
    parseXML(str,function(msg){
-	console.log(msg);
 	});
 }
-test();
 function sendMsg(rece){
 	var CreateTime=parseInt(new Date().getTime() / 1000);
 	var msg="";
 	if(rece.MsgType=="text"){
 		msg="谢谢关注,你说的是:"+rece.Content;
 		var sendMessage='<xml> <ToUserName><![CDATA['+rece.FromUserName+']]></ToUserName><FromUserName><![CDATA['+rece.ToUserName+']]></FromUserName>'+
-			'<CreateTime>'+CreateTime+'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['+rece.msg+']]></Content></xml>';
+			'<CreateTime>'+CreateTime+'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['+msg+']]></Content></xml>';
 		return sendMessage;
 	}
 }
