@@ -36,7 +36,7 @@ test();
 function sendMsg(rece){
 	var CreateTime=parseInt(new Date().getTime() / 1000);
 	var msg="";
-	if(MsgType=="text"){
+	if(rece.MsgType=="text"){
 		msg="谢谢关注,你说的是:"+rece.Content;
 		var sendMessage='<xml> <ToUserName><![CDATA['+rece.FromUserName+']]></ToUserName><FromUserName><![CDATA['+rece.ToUserName+']]></FromUserName>'+
 			'<CreateTime>'+CreateTime+'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['+rece.msg+']]></Content></xml>';
