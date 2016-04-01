@@ -11,4 +11,5 @@ module.exports = function (app) {
 	});
     app.get('/weixin', controllers.weixin);
     app.get('/get_access_toker',webchat.getAccessToken);
+    app.post('/weixin',webchat.receiveMsg);
 }

@@ -5,15 +5,30 @@ exports.getAccessToken=function(req,res){
 }
 exports.receiveMsg=function(req,res){
 	console.log(req.body);
-	var msg=parseXML(req.body.data);
-	console.log(msg);
+	parseXML(req.body.data,function(msg){
+		var receiveMsg=sendMsg(msg);
+	        console.log(msg);
+        	console.log(receiveMsg);
+        	res.end(receiveMsg);
+
+	});
+}
+function sendMsg(rece){
+	var CreateTime=parseInt(new Date().getTime() / 1000);
+	var msg="";
+	if(MsgType=="text"){
+		msg="谢谢关注,你说的是:"+rece.Content;
+		var sendMessage='<xml> <ToUserName><![CDATA['+rece.FromUserName+']]></ToUserName><FromUserName><![CDATA['+rece.ToUserName+']]></FromUserName>'+
+			'<CreateTime>'+CreateTime+'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['+rece.msg+']]></Content></xml>';
+		return sendMessage;
+	}
 }
 function parseXML(xml,callback){
 	// 定义解析存储变量
 	var msgJson={
 	  ToUserName:"",
 	  FromUserName:"",
-	  CreateTime="",
+	  CreateTime:"",
 	  MsgType:"",
 	  Content:""
 	}
