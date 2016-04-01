@@ -3,10 +3,11 @@ var controllers = require('./controllers'),
     webchat = require('./controllers/webchat-controller');
 module.exports = function (app) {
 
+	var i=0;
     //首页
     app.get('/',function(req,res){
 	res.render('hello',{
-		title:'welcome here'
+		title:'welcome here'+(i++)
 	});
 	});
     app.get('/weixin', controllers.weixin);
