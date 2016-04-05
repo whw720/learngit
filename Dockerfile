@@ -5,7 +5,7 @@
 # 2. Checkout source: git@github.com:whw720/learngit.git
 # 3. Build container: docker build .
 
-FROM   FROM daocloud.io/node:0.10-onbuild
+FROM  daocloud.io/node:0.10-onbuild
 # centos:centos6
 
 # Enable EPEL for Node.js
