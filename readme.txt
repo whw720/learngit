@@ -1,26 +1,13 @@
-my practice shchool programmer
-Git is a distributed version control system.
-Git is free software.
-
-Git is a distributed version control system.
-Git is free software distributed under the GPL.
-
-add school project.  #nodejs web Application
-
-date:2016-03-17 15:00
-add branch dev for coding
-
-date:16:07
-change by github.com
-
-date:16:14
-add branch dev
-
-add test branch dev
-
-date:16:26
-other dev change
-
-gittest add some message
-add file
+项目说明：
+    learngit 是一个个人练习使用的，基于nodejs的项目。开发于2016年3月
+涉及技术
+    nodejs+mysql  使用docker构建，布置在daocloud.io上面
+主要功能
+    微信公众号开发
+    爬虫天气信息
+开发日志
+  2016-3月
+     完成服务器搭建，微信接口对接
+  2016-4-5
+     完成天气爬虫功能，并在微信里输入天气，可以返回郑州天气信息
 
