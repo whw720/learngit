@@ -7,6 +7,7 @@ exports.index = function(req, res) {
         webRoot : baseUrl
 	});
 };
+//微信接口地址的GET验证
 exports.weixin = function(req, res) {
 	var signature=req.query.signature; //微信加密签名
 	var token='whw720school';
@@ -26,10 +27,10 @@ exports.weixin = function(req, res) {
 //	var shaObj = new jsSHA(original, 'TEXT');
 //	var scyptoString=shaObj.getHash('SHA-1', 'HEX'); 
 	if(signature == code){
- 	//验证成功
-	 res.end(echostr);  
+ 	    //验证成功
+	     res.end(echostr);
 	} else {
 	 //  //验证失败
 	 	 res.end('fail');
-	    }
+	}
 }

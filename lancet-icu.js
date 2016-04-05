@@ -107,7 +107,7 @@ app.use(express.compress());
 app.set('views', __dirname + '/views');
 app.engine('.html', ejs.__express);
 app.set('view engine', 'html');
-app.use(express.favicon(__dirname + '/public/s.ico'));
+app.use(express.favicon(__dirname + '/public/128.ico'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname + "/excel")));
 app.use(express.bodyParser({ uploadDir: "../public/upload"}));
