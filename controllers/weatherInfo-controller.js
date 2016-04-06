@@ -2,7 +2,8 @@
  * 用于获得天气信息
  * Created by whw on 2016/4/5.
  */
-var sourceURL='https://www.baidu.com/home/other/data/weatherInfo?city=%E9%83%91%E5%B7%9E&indextype=manht&_req_seqid=0xca933f4700004e2c&asyn=1&t=1459837939557&sid=18881_1443_18205_19558_17000_14968_11777_19152';
+var sourceURL='https://www.baidu.com/home/other/data/weatherInfo?';
+//?city=%E9%83%91%E5%B7%9E&indextype=manht&_req_seqid=0xca933f4700004e2c&asyn=1&t=1459837939557&sid=18881_1443_18205_19558_17000_14968_11777_19152
 var node = {
     async: require('async'),
     cheerio: require('cheerio'),
@@ -68,6 +69,11 @@ exports.getWeather=function(req,res){
     });
 };
 exports.getWeatherInfo=function(city,callback){
+    var CreateTime = new Date().getTime();
+    sourceURL +='t='+CreateTime;
+    if(city&&city!=""){
+        sourceURL += 'city='+encodeURI(city);
+    }
     reptile.start(function(msg){
         callback(packMsg(msg))
     });
