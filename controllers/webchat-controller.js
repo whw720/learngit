@@ -32,19 +32,23 @@ function test() {
 }
 function sendMsg(rece,callback) {
     var msg = "";
+    console.log('00000000000000000000000');
+    console.log(rece);
     if (rece.MsgType == "text") {
-        console.log(typeof rece.Content);
-        if(rece.Content.trim().toString().indexOf('天气')==0){
+        console.log('1111111111111111111');
+        if(rece.Content.toString().trim().indexOf('天气')==0){
+            console.log('2222222222222222222');
             weather.getWeatherInfo(function(info){
-                callback(packMsg(info,rece));
+                console.log('333333333333333');
+                callback(packMsgText(info,rece));
             });
         }else{
-            msg = "谢谢关注,目前本微信仅支持天气功能，请尝试输入天气" + rece.Content;
-            callback(packMsg(msg,rece));
+            msg = "谢谢关注,目前本微信仅支持天气功能，请尝试输入'天气'" ;
+            callback(packMsgText(msg,rece));
         }
     }
 }
-function packMsg(content,rece){
+function packMsgText(content,rece){
     var CreateTime = parseInt(new Date().getTime() / 1000);
     var sendMessage = '<xml> <ToUserName><![CDATA[' + rece.FromUserName + ']]></ToUserName><FromUserName><![CDATA[' + rece.ToUserName + ']]></FromUserName>' +
         '<CreateTime>' + CreateTime + '</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[' + content + ']]></Content></xml>';

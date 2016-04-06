@@ -114,7 +114,6 @@ var reptile={
             if (!err) console.log('下载页面成功：%s', uri);
             var page = {uri: uri, html: body};
             var weather=JSON.parse(page.html);
-            console.log(weather);
             self.copyValue(weather.data.weather.content||null);
             callback(false,msg);
         });
