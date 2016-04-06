@@ -33,12 +33,13 @@ function test() {
 function sendMsg(rece,callback) {
     var msg = "";
     if (rece.MsgType == "text") {
-        if(rece.content.trim().replace(/(^\s*)|(\s*$)/g, "").indexOf('天气')==0){
+        console.log(typeof rece.content);
+        if(rece.content.toString().indexOf('天气')==0){
             weather.getWeatherInfo(function(info){
                 callback(packMsg(info,rece));
             });
         }else{
-            msg = "谢谢关注,你说的是:" + rece.Content;
+            msg = "谢谢关注,目前本微信仅支持天气功能，请尝试输入天气" + rece.Content;
             callback(packMsg(msg,rece));
         }
     }
