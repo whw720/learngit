@@ -8,4 +8,4 @@ Desktop.ini
 #project
 *.svn
 *.idea
-
+logs/
