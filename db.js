@@ -1,12 +1,11 @@
 /**
  * 功能说明: 数据库操作封装
- * @author: 王小伟
  */
 var mysql = require('mysql'),
 	queues = require('mysql-queues'),
 	log4js = require('log4js'),
 	log = log4js.getLogger('db'),
-	config = require('./config/lancet-config');
+	config = require('./config/learngit-config');
 
 exports.pool = mysql.createPool({
 	host: config.db.HOST,

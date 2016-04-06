@@ -1,7 +1,7 @@
 {
   "appenders": [{
     "type": "dateFile",
-    "filename": "logs/lancet.log",
+    "filename": "logs/learngit.log",
     "pattern": "-yyyy-MM-dd",
     "maxLogSize": 1048576,
     "backups": 5,

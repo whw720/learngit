@@ -34,7 +34,7 @@ module.exports = function(grunt) {
       },
       zip: {
         files: [
-          {src: ['bin/**/lancet-icu', 'bin/**/lancet-icu.cmd']}, 
+          {src: ['bin/**/learngit', 'bin/**/learngit.cmd']},
           {expand: true, cwd: tempdir, src: ['**']},
           {expand: true, src: ['**/*.key', 'controllers/**/*.json','config/*.json', 'public/**', '!public/**/*.js', 'views/**', '**/extjs/**/*', 'node_modules/**', '!node_modules/grunt*/**', 'node_modules/ursa/**', 'lib/**/*.pub', 'version.json']},
         ]

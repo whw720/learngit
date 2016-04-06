@@ -24,12 +24,16 @@ function test() {
         "<FromUserName><![CDATA[fromUser]]></FromUserName>" +
         "<CreateTime>1348831860</CreateTime>" +
         " <MsgType><![CDATA[text]]></MsgType>" +
-        "<Content><![CDATA[this is a test]]></Content>" +
+        "<Content><![CDATA[天气 郑州]]></Content>" +
         " <MsgId>1234567890123456</MsgId>" +
         " </xml>";
     parseXML(str, function (msg) {
+        sendMsg(msg,function(receiveMsg){
+            res.end(receiveMsg);
+        });
     });
 }
+//被动接收消息后发送给用户消息
 function sendMsg(rece,callback) {
     var msg = "";
     console.log('00000000000000000000000');
@@ -97,3 +101,5 @@ function parseXML(xmlstr, callback) {
     });
     parse.parseString(xmlstr);
 }
+
+exports.test=test;

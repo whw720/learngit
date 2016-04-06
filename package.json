@@ -1,9 +1,9 @@
 {
-  "name": "lancet-icu",
+  "name": "learngit",
   "version": "1.0.4",
   "private": true,
   "scripts": {
-    "start": "node lancet-icu.js"
+    "start": "node learngit.js"
   },
   "dependencies": {
     "express": "3.3.4",

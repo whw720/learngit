@@ -20,4 +20,4 @@ ADD . /src
 RUN cd /src; 
 
 EXPOSE 5000 
-CMD ["node", "/src/lancet-icu.js"]
+CMD ["node", "/src/learngit.js"]

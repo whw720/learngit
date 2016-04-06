@@ -15,4 +15,5 @@ module.exports = function (app) {
     app.post('/weixin',webchat.receiveMsg);
 
 	app.get('/weather',weather.getWeather);
+	app.get('/test',webchat.test);
 }

@@ -1,5 +1,5 @@
 #config fie
-lancet-config.js
+learngit-config.js
 
 #windows
 Thumbs.db
@@ -8,4 +8,5 @@ Desktop.ini
 #project
 *.svn
 *.idea
+*.bak
 logs/

@@ -1,2 +1,2 @@
-echo ÐÞ¸Ä´úÂë×Ô¶¯ÖØÆô icu
-supervisor ..\lancet-icu.js
+echo ï¿½Þ¸Ä´ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ icu
+supervisor ..\learngit.js

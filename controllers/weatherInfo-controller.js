@@ -69,10 +69,8 @@ exports.getWeather=function(req,res){
     });
 };
 exports.getWeatherInfo=function(city,callback){
-    var CreateTime = new Date().getTime();
-    sourceURL +='t='+CreateTime;
     if(city&&city!=""){
-        sourceURL += 'city='+encodeURI(city);
+        sourceURL += '&city='+encodeURI(city);
     }
     reptile.start(function(msg){
         callback(packMsg(msg))
@@ -93,9 +91,11 @@ function packToday(info,item){
     str=(info[item].name||info[item].time)+
         "天气："+info[item].condition+
         " 风："+info[item].wind+
-        " 温度："+info[item].temp+
-        " pm2.5："+info[item].pm25+
-        " 污染指数："+info[item].pollution;
+        " 温度："+info[item].temp;
+    if(item=='today'||item=='tomorrow'){
+        str+=" pm2.5："+(info[item].pm25||"无")+
+        " 污染指数："+(info[item].pollution||"无");
+    }
     return str;
 }
 var reptile={
@@ -129,11 +129,11 @@ var reptile={
         var self = this;
         if(content){
             for(var item in content){
-                    for(var it in msg){
-                        if(it==item){
-                            msg[it]=content[item];
-                        }
+                for(var it in msg){
+                    if(it==item){
+                        msg[it]=content[item];
                     }
+                }
             }
         }
     }
