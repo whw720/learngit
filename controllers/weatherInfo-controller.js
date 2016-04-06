@@ -99,7 +99,6 @@ var reptile={
     start: function(callback) {
         var self = this;
         var async = node.async;
-        console.log('string------------------');
         self.downPage(sourceURL,function(err,result){
             callback(result);
         });

@@ -33,8 +33,8 @@ function test() {
 function sendMsg(rece,callback) {
     var msg = "";
     if (rece.MsgType == "text") {
-        console.log(typeof rece.content);
-        if(rece.content.toString().indexOf('天气')==0){
+        console.log(typeof rece.Content);
+        if(rece.Content.trim().toString().indexOf('天气')==0){
             weather.getWeatherInfo(function(info){
                 callback(packMsg(info,rece));
             });
