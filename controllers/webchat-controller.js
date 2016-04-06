@@ -36,7 +36,7 @@ function sendMsg(rece,callback) {
     console.log(rece);
     if (rece.MsgType == "text") {
         console.log('1111111111111111111');
-        if(rece.Content.toString().trim().indexOf('天气')==0){
+        if(rece.Content.toString().indexOf('天气')==0){
             console.log('2222222222222222222');
             weather.getWeatherInfo(function(info){
                 console.log('333333333333333');
