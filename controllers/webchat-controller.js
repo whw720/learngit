@@ -38,7 +38,7 @@ function sendMsg(rece,callback) {
     var msg = "";
     console.log(rece);
     if (rece.MsgType == "text") {
-        if(rece.Content.toString().indexOf('天气')==0){
+        if(rece.Content.toString().format().indexOf('天气')==0){
             var city=rece.Content.toString().split(' ');
             weather.getWeatherInfo(city[1],function(info){
                 console.log('333333333333333');

@@ -131,7 +131,7 @@ process.on('uncaughtException', function(err) {
 
 //主程序启动
 var server = app.listen(app.get('port'), function(req, rsp) {
-	log.debug('单进程服务端启动成功，端口：%d', app.get('port'));
+	log.debug('服务端启动成功，端口：%d', app.get('port'));
 	//start socket.io service.
 	//exports.socketIO = new launcher(server);
 
