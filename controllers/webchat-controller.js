@@ -36,12 +36,9 @@ function test() {
 //被动接收消息后发送给用户消息
 function sendMsg(rece,callback) {
     var msg = "";
-    console.log('00000000000000000000000');
     console.log(rece);
     if (rece.MsgType == "text") {
-        console.log('1111111111111111111');
         if(rece.Content.toString().indexOf('天气')==0){
-            console.log('2222222222222222222');
             var city=rece.Content.toString().split(' ');
             weather.getWeatherInfo(city[1],function(info){
                 console.log('333333333333333');
