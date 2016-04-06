@@ -75,6 +75,8 @@ exports.getWeatherInfo=function(city,callback){
     sourceURL+='t='+CreateTime;
     if(city&&city!=""){
         sourceURL += '&city='+encodeURI(city);
+    }else{
+        sourceURL += '&city=%E9%83%91%E5%B7%9E'
     }
     console.log(sourceURL);
     reptile.start(function(msg){
@@ -136,6 +138,11 @@ var reptile={
             for(var item in content){
                 for(var it in msg){
                     if(it==item){
+                        if(item=='today'){
+                            content[item].name='今天';
+                        }else if(item=='tomorrow'){
+                            content[item].name='明天';
+                        }
                         msg[it]=content[item];
                     }
                 }

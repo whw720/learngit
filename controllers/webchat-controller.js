@@ -38,10 +38,10 @@ function sendMsg(rece,callback) {
     var msg = "";
     console.log(rece);
     if (rece.MsgType == "text") {
-        if(rece.Content.toString().format().indexOf('天气')==0){
-            var city=rece.Content.toString().split(' ');
+        var content=rece.Content.toString().format();
+        if(content=='w'||content=='weather'||content.indexOf('天气')==0){
+            var city=content.split(' ');
             weather.getWeatherInfo(city[1],function(info){
-                console.log('333333333333333');
                 callback(packMsgText(info,rece));
             });
         }else{
